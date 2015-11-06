@@ -1,0 +1,37 @@
+<ion-nav-bar align-title="center" class="bar-calm nav-title-slide-ios7">
+    <ion-nav-button class="button button-icon icon ion-ios7-minus-outline" ng-click="data.showDelete = !data.showDelete;"></ion-nav-button>
+    <ion-nav-button class="button button-clear" ui-sref="createTodo"><span class="color-topic">New</span></ion-nav-button>
+    <h1 class="title color-topic">MyTrip</h1>
+    
+
+    </ion-nav-bar>
+
+<ion-view></ion-view>
+
+<!--
+<ion-header-bar class="custom-blue">
+    <div class="buttons">
+        <button class="button button-icon icon ion-ios7-minus-outline" ng-click="data.showDelete = !data.showDelete;"></button>
+        <h1 class="title color-topic">All Todo Items</h1>
+        <button class="button button-clear" ui-sref="createTodo"><span class="color-topic">New</span></button>
+    </div>
+</ion-header-bar>
+-->
+<ion-content>
+    <ion-list show-delete="data.showDelete">
+        <ion-item ng-repeat="item in items | orderBy: '-createdAt'"
+                  item="item"
+                  href="#/todo/edit/{{item.objectId}}/{{item.content}}">
+            {{item.content}}
+            <ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(item)"></ion-delete-button>
+        </ion-item>
+    </ion-list>
+</ion-content>
+
+<ion-nav-view animation="slide-left-right"></ion-nav-view>
+<nav mfb-menu position="br" effect="slidein" label="關閉"
+    active-icon="ion-close-round" resting-icon="ion-information"
+    toggling-method="click" class="font-set">
+    <button mfb-button icon="ion-settings" label="設定" onclick="location='views/settings.html'"></button class="font-set">
+    <button mfb-button icon="ion-map" label="旅行地圖" onclick="location='views/map.html'"></button>
+</nav>

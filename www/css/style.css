@@ -1,0 +1,112 @@
+
+/*-------------Cony--------------*/
+.bar-calm .button-icon {
+	color: white;
+}
+#comment {
+	color: gray;
+}
+.like {
+	color: #ff0000;
+}
+.like:hover {
+	color: #ff0000;
+}
+.title {
+    color: #000000;
+}
+.custom-light {
+    background-color:#FFFFEF;
+ }
+.custom-blue {
+    background-color: #00DDDD;
+    border: 0px;
+ }
+.color-topic {
+    color: white;
+ }
+.font-set {
+    font-family: 華康秀風體W3;
+}
+.font-setitle {
+    font-family: 微軟正黑體;
+    font-weight: bolder;
+}
+.font-regular {
+    font-family: 微軟正黑體;
+}
+.card .item {
+    background-color: #FAFAFA;
+ }
+.radius {
+    border-radius: 50px;
+}
+.toggle input:checked + .track {
+  border-color: #00DDDD !important;
+  background-color: #00DDDD !important;
+}
+/*-------------Cony--------------*/
+.avatar{
+    border-radius: 50%;
+}
+.tab-item{
+    margin: 0;
+    line-height: 60px;
+    box-sizing: content-box;
+    font-size: 25px;
+    color:#FFFFFF;
+    opacity: 1;
+    max-width: 250px;
+    border-radius: 50px;
+    font-family:微軟正黑體;
+}
+.l-login{
+    font-size: 18px;
+    line-height: 50px;
+    top:15px;
+    padding: 0 20px;
+    box-sizing: content-box;
+    font-family:'Century Gothic';
+    font-weight: bold; 
+}
+.button-size{
+    font-size: 13px;
+    box-sizing: content-box;
+    font-family:'Century Gothic';
+}
+.button-size2{
+    font-size: 13px;
+    box-sizing: content-box;
+    font-family:'Century Gothic';
+}
+.a-head{
+     font-size: 28px;
+     font-family:微軟正黑體;
+     font-weight: bold; 
+     color:#616161;
+}
+.a-button{
+    margin: 0;
+    line-height: 60px;
+    box-sizing: content-box;
+    font-size: 28px;
+}
+.f-head{
+     font-size: 28px;
+     font-family:微軟正黑體;
+     font-weight: bold; 
+     color:#616161;
+}
+.f-text{
+    font-size: 18px;
+    color:#616161;
+    font-family:微軟正黑體;
+}
+.f-email{
+    background: #E0E0E0;
+}
+.f-button{
+    left:5px;
+    top: 15px;
+    font-size: 15px;
+}

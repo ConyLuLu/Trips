@@ -14,10 +14,15 @@ angular.module('todoApp.controllers',['ng-mfb']).controller('TodoListController'
 
 }]).controller('TodoCreationController',['$scope','Todo','$state',function($scope,Todo,$state){
 
-    $scope.todo={};
+    $scope.trip={};
 
     $scope.create=function(){
-        Todo.create({content:$scope.todo.content}).success(function(data){
+        Todo.create({
+          content:$scope.trip.content,
+          tripName:$scope.trip.title,
+          startAt:$scope.trip.startAt,
+          endAt:$scope.trip.endAt
+        }).success(function(data){
             $state.go('todos');
         });
     }

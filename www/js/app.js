@@ -17,7 +17,7 @@ angular.module('todoApp', ['ionic','ng-mfb','todoApp.controllers','todoApp.servi
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
-    $state.go('login');
+    $state.go('todos');
     //"YOUR APP ID", "JAVASCRIPT KEY"
     Parse.initialize("iTwpohuMLeF5sMxPFK7iiWWoagcUnoNcRr5G7zjX", "aReF1HkdLjQtpEdZy3xvFVxuYiL8H5Fa9qmqCv95");
 
@@ -45,7 +45,15 @@ angular.module('todoApp', ['ionic','ng-mfb','todoApp.controllers','todoApp.servi
             controller: 'LoginCtrl'
         }).state('signin', {
             url: '/signin',
-            templateUrl: 'views/loginto.html',
+            templateUrl: 'views/signin.html',
+            controller: 'LoginCtrl'
+          }).state('settings', {
+            url: '/settings',
+            templateUrl: 'views/settings.html',
+            controller: 'LoginCtrl'
+          }).state('map', {
+            url: '/map',
+            templateUrl: 'views/map.html',
             controller: 'LoginCtrl'
           });
          

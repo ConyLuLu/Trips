@@ -35,6 +35,14 @@
 .font-regular {
     font-family: 微軟正黑體;
 }
+.font-regular label span {
+    font-size: 18px;
+}
+.font-regular ion-button {
+    font-size: 20px;
+    padding: 5px;
+    margin: 5px;
+}
 .card .item {
     background-color: #FAFAFA;
  }
@@ -45,29 +53,42 @@
   border-color: #00DDDD !important;
   background-color: #00DDDD !important;
 }
+
+/*signin page*/
+#infolist {
+    //margin:1500px;
+    border-radius: 5px;
+}
+#loginbtn {
+    border-radius: 5px;
+    padding: 5px;
+    margin: 20px 0px 20px 0px;//top,left,bottom,right
+}
+#singnupbtn {
+    border-radius: 5px;
+    padding: 5px;
+}
+/*signin page*/
+
+.login {
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 20px;
+}
+.regbtn {
+    font-size: 20px;
+}
+
 /*-------------Cony--------------*/
-.avatar{
+#logoimg {
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
+    padding: 15px;
 }
 .tab-item{
-    margin: 0;
-    line-height: 60px;
-    box-sizing: content-box;
-    font-size: 25px;
-    color:#FFFFFF;
-    opacity: 1;
-    max-width: 250px;
-    border-radius: 50px;
+    border-radius: 5px;
     font-family:微軟正黑體;
-}
-.l-login{
-    font-size: 18px;
-    line-height: 50px;
-    top:15px;
-    padding: 0 20px;
-    box-sizing: content-box;
-    font-family:'Century Gothic';
-    font-weight: bold; 
 }
 .button-size{
     font-size: 13px;

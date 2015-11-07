@@ -1,7 +1,7 @@
 <ion-view title="Sign Up">
     <ion-content padding="true" class="has-header">
         <form>
-            <ion-list>
+            <ion-list class="font-regular">
                 <label class="item item-input">
                     <span class="input-label">帳號</span>
                     <input type="text" placeholder="使用者帳號" ng-model="data.username">
@@ -20,7 +20,11 @@
                 </label>
             </ion-list>
             <div class="col text-center">
-              <button class="tab-item button button-assertive" ng-click="signupEmail()">註冊</button>
+              <button class="login button button-full button-assertive" ng-click="signupEmail()"><span class="font-regular">註冊</span></button>
+            </div>
+            <div class="row">
+              <a class="col col-50 button button-clear button-positive">忘記密碼?</a>    
+              <a class="col col-50 button button-outline button-assertive" id="singnupbtn" href="#/signin">登入</a>
             </div>
         </form>
     </ion-content>

@@ -2,9 +2,9 @@
     <ion-content padding="true" class="has-header font-regular">
         <form>
             <div class="col text-center">
-              <img class="avatar" width="300" height="300" src="pics/dog.jpg"/>
+              <img class="avatar" id="logoimg" src="pics/dog.jpg"/>
             </div>
-            <ion-list>
+            <ion-list id="infloist">
                 <label class="item item-input">
                     <span class="input-label">帳號</span>
                     <input type="text" placeholder="使用者帳號" ng-model="data.username">
@@ -14,10 +14,10 @@
                     <input type="password" placeholder="輸入密碼..." ng-model="data.password">
                 </label>
             </ion-list>
-            <button class="l-login button button-full button-dark padding" ng-click="loginEmail()"><span class="font-regular">登入</span></button>
+            <button class="regbtn l-login button button-full button-assertive" ng-click="loginEmail()"  id="loginbtn"><span class="font-regular">登入</span></button>
             <div class="row">
-              <a class="col col-50 button button-clear button-light">忘記密碼?</a>    
-              <a class="col col-50 button button-clear button-positive" href="#/signup">建立帳戶</a>
+              <a class="col col-50 button button-clear button-positive">忘記密碼?</a>    
+              <a class="col col-50 button button-outline button-assertive" id="singnupbtn" href="#/signup">建立帳戶</a>
             </div>
         </form>
     </ion-content>

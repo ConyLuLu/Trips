@@ -1,27 +1,25 @@
 <ion-view title="Create a Trip">
 
 <ion-content>
-    <div>
-        <ion-list class="font-regular">
-            <label class="item item-input ">
-                <span class="input-label">名稱</span>
-                <input type="text" placeholder="旅程名稱" ng-model="trip.title">
-            </label>
-            <label class="item item-input">
-                <span class="input-label">開始日期</span>
-                <input class="font-regular" type="date" ng-model="trip.startAt">
-            </label>
-            <label class="item item-input">
-                <span class="input-label">結束日期</span>
-                <input type="date" ng-model="trip.endAt">
-            </label>
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">簡短敘述</span>
-                <textarea type="text" placeholder="我想說......" name="content" rows="10" ng-model="trip.content" required></textarea>
-            </label>
-            <ion-button class="button button-block button-calm" ng-click="create()">
-                加入旅程
-            </ion-button>
-        </ion-list>
-    </div>
+    <ion-list class="font-regular">
+        <label class="item item-input ">
+            <span class="input-label">名稱</span>
+            <input type="text" placeholder="旅程名稱" ng-model="trip.tripName">
+        </label>
+        <label class="item item-input">
+            <span class="input-label">開始日期</span>
+            <input class="font-regular" type="date" ng-model="trip.startAt">
+        </label>
+        <label class="item item-input">
+            <span class="input-label">結束日期</span>
+            <input type="date" ng-model="trip.endAt">
+        </label>
+        <label class="item item-input item-stacked-label">
+            <span class="input-label">簡短敘述</span>
+            <textarea type="text" placeholder="我想說......" name="content" rows="10" ng-model="trip.content" required></textarea>
+        </label>
+        <ion-button class="button button-block button-calm" ng-click="create()">
+            加入旅程
+        </ion-button>
+    </ion-list>
 </ion-content>

@@ -10,6 +10,7 @@ angular.module('todoApp.controllers',['ng-mfb']).controller('TodoListController'
     $scope.onItemDelete=function(item){
         Todo.delete(item.objectId);
         $scope.items.splice($scope.items.indexOf(item),1);
+
     }
 
 }]).controller('TodoCreationController',['$scope','Todo','$state',function($scope,Todo,$state){
@@ -19,9 +20,10 @@ angular.module('todoApp.controllers',['ng-mfb']).controller('TodoListController'
     $scope.create=function(){
         Todo.create({
           content:$scope.trip.content,
-          tripName:$scope.trip.title,
+          tripName:$scope.trip.tripName,
           startAt:$scope.trip.startAt,
-          endAt:$scope.trip.endAt
+          endAt:$scope.trip.endAt,
+          like:$scope.trip.like=false
         }).success(function(data){
             $state.go('todos');
         });
@@ -29,11 +31,24 @@ angular.module('todoApp.controllers',['ng-mfb']).controller('TodoListController'
 
 
 }]).controller('TodoEditController',['$scope','Todo','$state','$stateParams',function($scope,Todo,$state,$stateParams){
+    
+    $scope.trip={
+        id:$stateParams.id,
+        tripName:$stateParams.tripName,
+        startAt:$stateParams.startAt,
+        endAt:$stateParams.endAt,
+        content:$stateParams.content
+      };
 
-    $scope.todo={id:$stateParams.id,content:$stateParams.content};
-
+    
+    //console.log(trip.id);
     $scope.edit=function(){
-        Todo.edit($scope.todo.id,{content:$scope.todo.content}).success(function(data){
+        Todo.edit($scope.trip.id,{
+            tripName:$scope.trip.tripName,
+            //startAt:scope.trip.startAt,
+            //endAt:scope.trip.endAt,
+            content:$scope.trip.content
+          }).success(function(data){
             $state.go('todos');
         });
     }
@@ -103,11 +118,11 @@ angular.module('todoApp.controllers',['ng-mfb']).controller('TodoListController'
       like: false
     });
     $scope.taskModal.hide();
-    task.title = "";
-    task.startDate = "";
-    task.endDate = "";
-    task.comment = "";
-  }
+      task.title = "";
+      task.startDate = "";
+      task.endDate = "";
+      task.comment = "";
+    }
 
   // Open our new task modal
   $scope.newTask = function() {

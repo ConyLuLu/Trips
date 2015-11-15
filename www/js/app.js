@@ -32,7 +32,7 @@ angular.module('todoApp', ['ionic','ng-mfb','todoApp.controllers','todoApp.servi
             controller:'TodoCreationController',
             templateUrl:'views/create-todo.html'
         }).state('editTodo',{
-            url:'/todo/edit/:id/:content',
+            url:'/todo/edit/:id/:tripName/:startAt/:endAt/:content',
             controller:'TodoEditController',
             templateUrl:'views/edit-todo.html'
         }).state('login', {

@@ -1,0 +1,99 @@
+<ion-header-bar class="custom-blue">
+    <div class="buttons">
+        <button class="button button-icon icon ion-ios7-minus-outline" ng-click="data.showDelete = !data.showDelete;"></button>
+        <h1 class="title color-topic">MyTrip</h1>
+        <button class="button button-clear" ui-sref="createTodo"><span class="color-topic">New</span></button>
+    </div>
+</ion-header-bar>
+
+<ion-content>
+    <ion-list show-delete="data.showDelete">
+        <ion-item ng-repeat="item in items | orderBy: '-createdAt'"
+                  item="item"
+                  href="#/todo/edit/{{item.objectId}}/{{item.content}}">
+            {{item.content}}
+            <ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(item)"></ion-delete-button>
+        </ion-item>
+    </ion-list>
+    <ion-nav-view animation="slide-left-right"></ion-nav-view>
+</ion-content>
+
+
+
+
+  <body ng-app="myTrip" ng-controller="MyTripCtrl">
+      <nav mfb-menu position="br" effect="slidein" label="關閉"
+      active-icon="ion-close-round" resting-icon="ion-information"
+      toggling-method="click" class="font-set">
+        <button mfb-button icon="ion-settings" label="設定" onclick="location='settings.html'"></button class="font-set">
+        <button mfb-button icon="ion-map" label="旅行地圖" onclick="location='map.html'"></button>
+      </nav>
+      <script src="ng-material-floating-button/src/mfb-directive.js"></script>
+
+      
+        <!-- Center content -->
+          <ion-header-bar class="custom-blue" align-title="center" >
+            <h1 class="title color-topic">MyTrip</h1>
+            <!-- New Task button-->
+            <button class="button button-icon color-topic" ng-click="newTask()">
+              <i class="icon ion-plus-round"></i>
+            </button>
+          </ion-header-bar>
+          <ion-content class="custom-dark custom-light">
+            <div class="list card" ng-repeat="task in tasks" show-delete="shouldShowDelete">
+              <div class="item item-icon-right">
+                <h2 class="font-setitle">{{ task.title }}</h2>
+                <p class="font-set">{{ task.startDate|date:"MMM,d,yyyy"}} - {{ task.endDate|date:"MMM,dd,yyyy"}}</p>
+                <i class="button button-icon icon ion-ios-heart" ng-click="like(task)" ng-class="{like:task.like}"></i>
+              </div>
+              <div class="item item-image">
+                <img src="travel2.jpg">
+              </div>
+              <div id="comment" class="item font-set" href="#">
+                 {{task.comment}}
+              </div>
+            </div>
+          </ion-content>
+
+
+      <script id="new-task.html" type="text/ng-template">
+
+        <div class="modal">
+
+          <!-- Modal header bar -->
+          <ion-header-bar class="bar-secondary custom-blue" align-title="center">
+            <h1 class="title font-setitle color-topic">新增旅程</h1>
+            <button class="button button-clear color-topic" ng-click="closeNewTask()">
+              <div class="color-topic font-regular">關閉</div>
+            </button>
+          </ion-header-bar>
+
+          <!-- Modal content area -->
+          <ion-content>
+
+            <form ng-submit="createTask(task)">
+              <div class="list font-set">
+                <label class="item item-input font-set">
+                  <input class="font-regular" type="text" placeholder="旅程名稱" ng-model="task.title">
+                </label>
+                <label class="item item-input">
+                  <input class="font-regular" type="text" placeholder="簡短敘述" ng-model="task.comment">
+                </label>
+                <label class="item item-input">
+                  <h3 class="font-regular">開始日期</h3>
+                  <input class="font-regular" type="date" ng-model="task.startDate">
+                </label>
+                <label class="item item-input">
+                  <h3 class="font-regular">結束日期</h3>
+                  <input type="date" ng-model="task.endDate">
+                </label>
+              </div>
+              <div class="padding">
+                <button type="submit" class="button button-block custom-blue font-regular">加入旅程</button>
+              </div>
+            </form>
+          </ion-content>
+        </div>
+      </script>
+
+  </body>

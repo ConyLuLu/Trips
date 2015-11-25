@@ -10,9 +10,9 @@
   <ion-content>
     <ion-list show-delete="data.showDelete">
 
-        <ion-item class="list item-text-wrap item item-complex item-thumbnail-left" ng-repeat="item in items | orderBy: '-createdAt'" item="item" href="#/todo/edit/{{item.objectId}}/{{item.tripName}}/{{trip.startAt}}/{{trip.endAt}}/{{item.content}}">
+        <ion-item class="list item-text-wrap item item-complex item-thumbnail-left" ng-repeat="item in items | orderBy: '-createdAt'" item="item" >
           <img src="pics/travel2.jpg">
-          <h2>{{item.tripName}}</h2>
+          <h2>{{item.place}}</h2>
           <p>{{item.content}}</p>
           <ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(item)"></ion-delete-button>
         </ion-item>

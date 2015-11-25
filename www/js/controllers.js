@@ -13,6 +13,18 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
 
     }
 
+}]).controller('LocationListController',['$scope','Locations',function($scope,Locations){
+
+    Locations.getAll().success(function(data){
+        $scope.items=data.results;
+    });
+
+    $scope.onItemDelete=function(item){
+        Locations.delete(item.objectId);
+        $scope.items.splice($scope.items.indexOf(item),1);
+
+    }
+
 }]).controller('TodoCreationController',['$scope','Todo','$state',function($scope,Todo,$state,$cordovaCamera){
 
     $scope.trip={};
@@ -25,7 +37,38 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
           endAt:$scope.trip.endAt,
           like:$scope.trip.like=false
         }).success(function(data){
-            $state.go('todos');
+            $state.go('locations');
+        });
+    }
+    $scope.takePicture = function() {
+        var options = { 
+            quality : 75, 
+            destinationType : Camera.DestinationType.DATA_URL, 
+            sourceType : Camera.PictureSourceType.CAMERA, 
+            allowEdit : true,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 300,
+            targetHeight: 300,
+            popoverOptions: CameraPopoverOptions,
+            saveToPhotoAlbum: false
+        };
+ 
+        $cordovaCamera.getPicture(options).then(function(imageData) {
+            $scope.imgURI = "data:image/jpeg;base64," + imageData;
+        }, function(err) {
+            // An error occured. Show a message to the user
+        });
+    }
+}]).controller('LocationCreationController',['$scope','Locations','$state',function($scope,Locations,$state,$cordovaCamera){
+
+    $scope.loc={};
+
+    $scope.create=function(){
+        Locations.create({
+          place:$scope.loc.place,
+          time:$scope.loc.time
+        }).success(function(data){
+            $state.go('locations');
         });
     }
     $scope.takePicture = function() {

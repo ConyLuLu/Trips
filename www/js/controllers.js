@@ -38,7 +38,7 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
             targetWidth: 300,
             targetHeight: 300,
             popoverOptions: CameraPopoverOptions,
-            saveToPhotoAlbum: true
+            saveToPhotoAlbum: false
         };
  
         $cordovaCamera.getPicture(options).then(function(imageData) {

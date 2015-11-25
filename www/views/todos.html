@@ -10,7 +10,7 @@
   <ion-content>
 <!--    <ion-list show-delete="data.showDelete">
 <ion-item -->
-        <div class="list-card item-text-wrap item item-complex" ng-repeat="item in items | orderBy: '-createdAt'" item="item" href="#/todo/edit/{{item.objectId}}/{{item.tripName}}/{{trip.startAt}}/{{trip.endAt}}/{{item.content}}">
+        <div class="list-card item-text-wrap item item-complex" ng-repeat="item in items | orderBy: '-createdAt'" item="item">
           
           <div class="item item-icon-right">
               <h2>{{item.tripName}}</h2>

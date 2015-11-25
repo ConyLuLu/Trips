@@ -100,18 +100,16 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
         content:$stateParams.content
       };
 
-    
-    //console.log(trip.id);
     $scope.edit=function(){
         Todo.edit($scope.trip.id,{
             tripName:$scope.trip.tripName,
-            //startAt:scope.trip.startAt,
-            //endAt:scope.trip.endAt,
+            startAt:$scope.trip.startAt,
+            endAt:$scope.trip.endAt,
             content:$scope.trip.content
           }).success(function(data){
             $state.go('todos');
         });
-    }
+    };
 
 }]).controller('LoginCtrl', function($scope, $state) {
  

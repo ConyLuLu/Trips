@@ -1,7 +1,7 @@
 <ion-view title="Trips">
   <div class="buttons">
-    <ion-nav-buttons side="left">
-<!--      <button class="color-topic button button-icon icon ion-ios7-minus-outline" ng-click="data.showDelete = !data.showDelete;"></button>
+<!--    <ion-nav-buttons side="left">
+      <button class="color-topic button button-icon icon ion-ios7-minus-outline" ng-click="data.showDelete = !data.showDelete;"></button>
     </ion-nav-buttons> -->
     <ion-nav-buttons side="right"> 
       <button class="button button-clear icon ion-plus-round" ui-sref="createTodo"></button>
@@ -16,7 +16,6 @@
               <h2>{{item.tripName}}</h2>
               <a class="button button-icon icon ion-edit" href="#/todo/edit/{{item.objectId}}/{{item.tripName}}/{{item.startAt}}/{{item.endAt}}/{{item.content}}"></a>
               <p>{{ item.startAt|date:"MMM,d,yyyy"}} - {{ item.endAt|date:"MMM,dd,yyyy"}}</p>
-
           </div>
           <a class="item-image" ui-sref="locations">
             <img src="pics/travel2.jpg">
@@ -33,6 +32,7 @@
     <nav mfb-menu position="br" effect="slidein" label="關閉"
       active-icon="ion-close-round" resting-icon="ion-information"
       toggling-method="click" class="font-set">
-      <button mfb-button icon="ion-settings" label="設定" ui-sref="settings"></button class="font-set">
-      <button mfb-button icon="ion-map" label="旅行地圖" ui-sref="map"></button>
+      <button mfb-button icon="ion-settings" label="設定" ui-sref="settings"></button>
+      <button mfb-button icon="ion-location" label="旅行地圖" ui-sref="map"></button>
+      <button mfb-button icon="ion-map" label="旅程" ui-sref="todos"></button>
     </nav>

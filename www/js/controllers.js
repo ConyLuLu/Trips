@@ -25,7 +25,7 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
 
     }
 
-}]).controller('TodoCreationController',['$scope','Todo','$state',function($scope,Todo,$state,$cordovaCamera){
+}]).controller('TodoCreationController',function($scope,Todo,$state,$cordovaCamera){
 
     $scope.trip={};
 
@@ -59,7 +59,7 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
             // An error occured. Show a message to the user
         });
     }
-}]).controller('LocationCreationController',['$scope','Locations','$state',function($scope,Locations,$state,$cordovaCamera){
+}).controller('LocationCreationController',function($scope,Locations,$state,$cordovaCamera){
 
     $scope.loc={};
 
@@ -81,7 +81,7 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
             targetWidth: 300,
             targetHeight: 300,
             popoverOptions: CameraPopoverOptions,
-            saveToPhotoAlbum: false
+            saveToPhotoAlbum: true
         };
  
         $cordovaCamera.getPicture(options).then(function(imageData) {
@@ -90,7 +90,7 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
             // An error occured. Show a message to the user
         });
     }
-}]).controller('TodoEditController',['$scope','Todo','$state','$stateParams',function($scope,Todo,$state,$stateParams){
+}).controller('TodoEditController',['$scope','Todo','$state','$stateParams',function($scope,Todo,$state,$stateParams){
     
     $scope.trip={
         id:$stateParams.id,

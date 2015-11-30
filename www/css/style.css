@@ -82,6 +82,13 @@
 .show {
     border-radius: 1px red;
 }
+.picholder {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 /*-------------Cony--------------*/
 #logoimg {
     width: 300px;

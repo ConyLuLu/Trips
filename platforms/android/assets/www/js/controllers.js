@@ -25,41 +25,63 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
 
     }
 
-}]).controller('TodoCreationController',function($scope,Todo,$state,$cordovaCamera){
+}]).controller('TodoCreationController',function($scope,Todo,$state,$cordovaCamera,$stateParams){
 
     $scope.trip={};
 
     $scope.create=function(){
+        var trip = new Parse.Object("Todo");
+        trip.set("createdBy", Parse.User.current());
         Todo.create({
           content:$scope.trip.content,
           tripName:$scope.trip.tripName,
           startAt:$scope.trip.startAt,
           endAt:$scope.trip.endAt,
-          like:$scope.trip.like=false
+          //userId:$scope.trip.objectId
         }).success(function(data){
             $state.go('locations');
         });
+        $scope.uploadPhoto();
     }
-    $scope.takePicture = function() {
-        var options = { 
-            quality : 75, 
-            destinationType : Camera.DestinationType.DATA_URL, 
-            sourceType : Camera.PictureSourceType.CAMERA, 
-            allowEdit : true,
-            encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 300,
-            targetHeight: 300,
-            popoverOptions: CameraPopoverOptions,
-            saveToPhotoAlbum: false
+    $scope.takePicture = function () {
+        var options = {
+          quality: 100,
+          destinationType: Camera.DestinationType.DATA_URL,
+          sourceType: Camera.PictureSourceType.CAMERA,
+          allowEdit: true,
+          encodingType: Camera.EncodingType.JPEG,
+          targetWidth: 300,
+          targetHeight: 300,
+          popoverOptions: CameraPopoverOptions,
+          saveToPhotoAlbum: false
         };
- 
-        $cordovaCamera.getPicture(options).then(function(imageData) {
-            $scope.imgURI = "data:image/jpeg;base64," + imageData;
-        }, function(err) {
-            // An error occured. Show a message to the user
+   
+        $cordovaCamera.getPicture(options).then(function (imageData) {
+           $scope.imgURI = "data:image/jpeg;base64," + imageData;
+           $scope.imageData = imageData;
+            }, function (err) {
+           // An error occured. Show a message to the user
         });
     }
-}).controller('LocationCreationController',function($scope,Locations,$state,$cordovaCamera){
+    $scope.uploadPhoto = function(){
+
+      var post = Parse.Object.extend("Todo");
+      var newPost = new post();
+
+        // Creates parse file object you'll notice that you have to convert 
+        // $scope.imageData to a base 64 object. 
+      var parseFile = new Parse.File('mypic.jpeg',{base64:$scope.imageData});
+      newPost.set("Img_File",parseFile);
+      newPost.save(null,{
+        success: function(){
+             // do whatever
+        },
+        error: function(error){
+          // do whatever 
+        }
+      }) 
+    }
+}).controller('LocationCreationController',function($scope,Locations,$state,$cordovaCamera,$stateParams){
 
     $scope.loc={};
 
@@ -113,45 +135,44 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
 
 }]).controller('LoginCtrl', function($scope, $state) {
  
-  $scope.data = {};
+    $scope.data = {};
+   
+    $scope.signupEmail = function(){
+   
+      //Create a new user on Parse
+      var user = new Parse.User();
+      user.set("username", $scope.data.username);
+      user.set("password", $scope.data.password);
+      user.set("email", $scope.data.email);
+     
+      // other fields can be set just like with Parse.Object
+      user.set("somethingelse", "like this!");
+     
+      user.signUp(null, {
+        success: function(user) {
+          // Hooray! Let them use the app now.
+          alert("success!");
+        },
+        error: function(user, error) {
+          // Show the error message somewhere and let the user try again.
+          alert("Error: " + error.code + " " + error.message);
+        }
+      });
+    };
  
-  $scope.signupEmail = function(){
- 
-  //Create a new user on Parse
-  var user = new Parse.User();
-  user.set("username", $scope.data.username);
-  user.set("password", $scope.data.password);
-  user.set("email", $scope.data.email);
- 
-  // other fields can be set just like with Parse.Object
-  user.set("somethingelse", "like this!");
- 
-  user.signUp(null, {
-    success: function(user) {
-      // Hooray! Let them use the app now.
-      alert("success!");
-    },
-    error: function(user, error) {
-      // Show the error message somewhere and let the user try again.
-      alert("Error: " + error.code + " " + error.message);
-    }
-  });
- 
-};
- 
-  $scope.loginEmail = function(){
-    Parse.User.logIn($scope.data.username, $scope.data.password, {
-      success: function(user) {
-        // Do stuff after successful login.
-        alert("success!");
-        $state.go('todos');
-      },
-      error: function(user, error) {
-        // The login failed. Check error to see why.
-        alert("error!");
-      }
-    });
-  };
+    $scope.loginEmail = function(){
+      Parse.User.logIn($scope.data.username, $scope.data.password, {
+        success: function(user) {
+          // Do stuff after successful login.
+          alert("success!");
+          $state.go('todos');
+        },
+        error: function(user, error) {
+          // The login failed. Check error to see why.
+          alert("error!");
+        }
+      });
+    };
  
 }).controller('MyTripCtrl', function($scope, $ionicModal, $state, $ionicHistory) {
   // No need for testing data anymore

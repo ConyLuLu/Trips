@@ -1,12 +1,11 @@
 <ion-view title="Create a Trip">
-<ion-nav-buttons side="right"> 
+    <ion-nav-buttons side="right"> 
       <button class="button button-clear" ng-click="create()">create</button>
     </ion-nav-buttons>
 
 <ion-content>
-            <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
-            <img ng-show="imgURI === undefined" ng-src="http://placehold.it/300x300">
-            <button class="button" ng-click="takePicture()">Take Picture</button>
+            <img class="picholder" ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
+            <img class="picholder" ng-show="imgURI === undefined" ng-src="pics/150x150 add.png" ng-click="takePicture()">
     <ion-list class="font-regular">
         <label class="item item-input ">
             <span class="input-label">名稱</span>
@@ -24,8 +23,5 @@
             <span class="input-label">簡短敘述</span>
             <textarea type="text" placeholder="我想說......" name="content" rows="10" ng-model="trip.content" required></textarea>
         </label>
-        <ion-button class="button button-block button-calm" ng-click="create()">
-            加入旅程
-        </ion-button>
     </ion-list>
 </ion-content>

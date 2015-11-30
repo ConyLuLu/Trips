@@ -17,7 +17,7 @@ angular.module('todoApp', ['ionic','ngCordova','ng-mfb','todoApp.controllers','t
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
-    $state.go('todos');
+    //$state.go('todos');
     //"YOUR APP ID", "JAVASCRIPT KEY"
     Parse.initialize("iTwpohuMLeF5sMxPFK7iiWWoagcUnoNcRr5G7zjX", "aReF1HkdLjQtpEdZy3xvFVxuYiL8H5Fa9qmqCv95");
 

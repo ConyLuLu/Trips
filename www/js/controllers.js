@@ -3,14 +3,23 @@
  */
 angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoListController',['$scope','Todo',function($scope,Todo){
     
-    (function(){
-
-    })();
       
-    Todo.getAll().success(function(data){
-      $scope.getTrips();
-        
+    var  currentUser = Parse.User.current().id;
+    Todo.getAll(currentUser).success(function(data){
+      //$scope.getTrips();
+
+      $scope.items = data.results;
+      //$scope.items = $scope.setURL(data.results);//data undefined?
+      console.log($scope.items);
     });
+
+    $scope.setURL = function(objects) {
+      for (var i = 0; i < objects.length; i++) {
+        objects[i].imgURL = data.results[i].get('Img_File').url();
+      };
+      return objects;
+    }
+
     $scope.onItemDelete=function(item){
         Todo.delete(item.objectId);
         $scope.items.splice($scope.items.indexOf(item),1);
@@ -37,8 +46,6 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
                 //console.log(object.url)
                 //$('#pic')[0].src = imgURL;
                 $scope.picUrl = imgURL;
-                //console.log(imgURL);
-                //console.log("result: " + results[i]);
                 object2[i].Img_File = object.get('Img_File');
                 object2[i].content = object.get('content');
                 object2[i].tripName = object.get("tripName");
@@ -70,7 +77,7 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
 }]).controller('TodoCreationController',function($scope,Todo,$state,$cordovaCamera,$stateParams){
 
     $scope.trip={};
-    var currentUser = Parse.User.current();
+    var currentUser = Parse.User.current().id;
     $scope.create=function(){
         //var trip = new Parse.Object("Todo");
         //trip.set("createdBy", Parse.User.current());

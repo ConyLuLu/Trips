@@ -1,15 +1,15 @@
 <ion-view title="Create a Trip">
     <ion-nav-buttons side="right"> 
-      <button class="button button-clear" ng-click="create()">create</button>
+      <button class="button button-clear" ng-click="create()">新增</button>
     </ion-nav-buttons>
 
 <ion-content>
-            <img class="picholder" ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
+            <img class="picholder" ng-show="imgURI !== undefined" ng-src="{{imgURI}}" ng-click="takePicture()">
             <img class="picholder" ng-show="imgURI === undefined" ng-src="pics/150x150 add.png" ng-click="takePicture()">
     <ion-list class="font-regular">
         <label class="item item-input ">
             <span class="input-label">名稱</span>
-            <input type="text" placeholder="旅程名稱" ng-model="trip.tripName">
+            <input class="required" type="text" placeholder="旅程名稱" ng-model="trip.tripName">
         </label>
         <label class="item item-input">
             <span class="input-label">開始日期</span>

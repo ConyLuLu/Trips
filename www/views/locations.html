@@ -7,12 +7,13 @@
       <button class="button button-clear icon ion-plus-round" ui-sref="createLocation"></button>
     </ion-nav-buttons>
   </div>
+
   <ion-content>
     <ion-list show-delete="data.showDelete">
         <ion-item class="list item-text-wrap item item-complex item-thumbnail-left" ng-repeat="item in items | orderBy: '-createdAt'" item="item" >
           <img src="pics/travel2.jpg">
           <h2>{{item.place}}</h2>
-          <p>{{item.content}}</p>
+          <span class="item-note">{{item.time}}</span>
           <ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(item)"></ion-delete-button>
         </ion-item>
   </ion-content>
@@ -24,5 +25,6 @@
       active-icon="ion-close-round" resting-icon="ion-information"
       toggling-method="click" class="font-set">
       <button mfb-button icon="ion-settings" label="設定" ui-sref="settings"></button class="font-set">
-      <button mfb-button icon="ion-map" label="旅行地圖" ui-sref="map"></button>
+      <button mfb-button icon="ion-location" label="旅行地圖" ui-sref="map"></button>
+      <button mfb-button icon="ion-map" label="旅程" ui-sref="todos"></button>
     </nav>

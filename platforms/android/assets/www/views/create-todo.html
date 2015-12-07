@@ -4,7 +4,7 @@
     </ion-nav-buttons>
 
 <ion-content>
-            <img class="picholder" ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
+            <img class="picholder" ng-show="imgURI !== undefined" ng-src="{{imgURI}}" ng-click="takePicture()">
             <img class="picholder" ng-show="imgURI === undefined" ng-src="pics/150x150 add.png" ng-click="takePicture()">
     <ion-list class="font-regular">
         <label class="item item-input ">

@@ -28,19 +28,19 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
 }]).controller('TodoCreationController',function($scope,Todo,$state,$cordovaCamera,$stateParams){
 
     $scope.trip={};
-
+    var currentUser = Parse.User.current();
     $scope.create=function(){
-        var trip = new Parse.Object("Todo");
-        trip.set("createdBy", Parse.User.current());
-        Todo.create({
+        //var trip = new Parse.Object("Todo");
+        //trip.set("createdBy", Parse.User.current());
+/*        Todo.create({
           content:$scope.trip.content,
           tripName:$scope.trip.tripName,
           startAt:$scope.trip.startAt,
           endAt:$scope.trip.endAt,
-          //userId:$scope.trip.objectId
+
         }).success(function(data){
             $state.go('locations');
-        });
+        });*/
         $scope.uploadPhoto();
     }
     $scope.takePicture = function () {
@@ -62,25 +62,55 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
             }, function (err) {
            // An error occured. Show a message to the user
         });
+        var currentUser = Parse.User.current();
+        console.log(currentUser);
     }
     $scope.uploadPhoto = function(){
 
       var post = Parse.Object.extend("Todo");
       var newPost = new post();
-
         // Creates parse file object you'll notice that you have to convert 
         // $scope.imageData to a base 64 object. 
       var parseFile = new Parse.File('mypic.jpeg',{base64:$scope.imageData});
       newPost.set("Img_File",parseFile);
-      newPost.save(null,{
-        success: function(){
-             // do whatever
-        },
+      newPost.set("content",$scope.trip.content);
+      newPost.set("tripName",$scope.trip.tripName);
+      newPost.set("startAt",$scope.trip.startAt);
+      newPost.set("endAt",$scope.trip.endAt);
+      newPost.set("createdBy", currentUser);
+      newPost.save(null,{success:function(){$state.go('locations');},
         error: function(error){
-          // do whatever 
+          alert("error");
+        // do whatever 
         }
-      }) 
+      });
+      console.log(parseFile);
     }
+
+    $scope.getTrips = function(params) {
+      var TripsObject = Parse.Object.extend("Todo");
+      var query = new Parse.Query(TripsObject);
+      if(params !== undefined) {
+          if(params.createdBy !== undefined) {
+              query.equalTo("lastname", params.createdBy);
+          }
+          if(params.firstname !== undefined) {
+              query.equalTo("firstname", params.lastname);
+          }
+      }
+      query.find({
+          success: function(results) {
+              alert("Successfully retrieved " + results.length + " people!");
+              for (var i = 0; i < results.length; i++) {
+                  var object = results[i];
+                  console.log(object.id + ' - ' + object.get("firstname") + " " + object.get("lastname"));
+              }
+          },
+          error: function(error) {
+              alert("Error: " + error.code + " " + error.message);
+          }
+      });
+  };
 }).controller('LocationCreationController',function($scope,Locations,$state,$cordovaCamera,$stateParams){
 
     $scope.loc={};
@@ -151,7 +181,8 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
       user.signUp(null, {
         success: function(user) {
           // Hooray! Let them use the app now.
-          alert("success!");
+          //alert("success!");
+          $state.go('todos');
         },
         error: function(user, error) {
           // Show the error message somewhere and let the user try again.
@@ -164,7 +195,7 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
       Parse.User.logIn($scope.data.username, $scope.data.password, {
         success: function(user) {
           // Do stuff after successful login.
-          alert("success!");
+          //alert("success!");
           $state.go('todos');
         },
         error: function(user, error) {
@@ -175,48 +206,48 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
     };
  
 }).controller('MyTripCtrl', function($scope, $ionicModal, $state, $ionicHistory) {
-  // No need for testing data anymore
-  $scope.tasks = [];
-  // Create and load the Modal
-  $ionicModal.fromTemplateUrl('new-task.html', function(modal) {
-    $scope.taskModal = modal;
-  }, {
-    scope: $scope,
-    animation: 'slide-in-up'
-  });
-
-  // Called when the form is submitted
-  $scope.createTask = function(task) {
-    $scope.tasks.push({
-      title: task.title,
-      startDate: task.startDate,
-      endDate: task.endDate,
-      image: "travel.jpg",
-      comment: task.comment,
-      like: false
+    // No need for testing data anymore
+    $scope.tasks = [];
+    // Create and load the Modal
+    $ionicModal.fromTemplateUrl('new-task.html', function(modal) {
+      $scope.taskModal = modal;
+    }, {
+      scope: $scope,
+      //animation: 'slide-in-up'
     });
-    $scope.taskModal.hide();
-      task.title = "";
-      task.startDate = "";
-      task.endDate = "";
-      task.comment = "";
+
+    // Called when the form is submitted
+    $scope.createTask = function(task) {
+      $scope.tasks.push({
+        title: task.title,
+        startDate: task.startDate,
+        endDate: task.endDate,
+        image: "travel.jpg",
+        comment: task.comment,
+        like: false
+      });
+      $scope.taskModal.hide();
+        task.title = "";
+        task.startDate = "";
+        task.endDate = "";
+        task.comment = "";
+      }
+
+    // Open our new task modal
+    $scope.newTask = function() {
+      $scope.taskModal.show();
     }
 
-  // Open our new task modal
-  $scope.newTask = function() {
-    $scope.taskModal.show();
-  }
+    // Close the new task modal
+    $scope.closeNewTask = function() {
+      $scope.taskModal.hide();
+    }
 
-  // Close the new task modal
-  $scope.closeNewTask = function() {
-    $scope.taskModal.hide();
-  }
+    $scope.like = function(task) {
+      if (task.like == true)
+        task.like = false;
+      else 
+        task.like = true;
 
-  $scope.like = function(task) {
-    if (task.like == true)
-      task.like = false;
-    else 
-      task.like = true;
-
-  }
-});
+    }
+  });

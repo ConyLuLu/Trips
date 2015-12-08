@@ -11,9 +11,6 @@ angular.module('todoApp.services',[]).factory('Todo',['$http','PARSE_CREDENTIALS
                 },
                 params:{
                     "where": {"createdBy":userId},
-                   // "where": {"content":"ss"};
-                    //"where": JSON.stringify({
-                    //    "createdBy1": {"__type":"Pointer","className":"_User","objectId":userId}})
                 }
             });
         },
@@ -25,7 +22,6 @@ angular.module('todoApp.services',[]).factory('Todo',['$http','PARSE_CREDENTIALS
                 },
                 params:{
                     "where": {"createdBy":userId},
-                   // "where": {"content":"ss"};
                     //"where": JSON.stringify({
                     //    "createdBy1": {"__type":"Pointer","className":"_User","objectId":userId}})
                 }

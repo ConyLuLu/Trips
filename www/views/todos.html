@@ -10,11 +10,12 @@
   <ion-content>
 <!--    <ion-list show-delete="data.showDelete">-->
 
-        <div class="list-card item-text-wrap item item-complex" ng-repeat="item in items | orderBy: '-createdAt'" item="item">
+        <div class="card item-text-wrap item item-complex" ng-repeat="item in items | orderBy: '-createdAt'" item="item">
           
           <div class="item item-icon-right">
               <h2>{{item.tripName}}</h2>
-              <a class="button button-icon icon ion-edit" href="#/todo/edit/{{item.objectId}}/{{item.tripName}}/{{item.startAt}}/{{item.endAt}}/{{item.content}}"></a>
+              <i class="button button-icon icon ion-edit" ng-click="openPopover($event,item)"></i>
+              <!--href="#/todo/edit/{{item.objectId}}/{{item.tripName}}/{{trip.startAt}}/{{trip.endAt}}/{{item.content}}" -->
               <p>{{ item.startAt|date:"MMM,d,yyyy"}} - {{ item.endAt|date:"MMM,dd,yyyy"}}</p>
           </div>
           <a class="item-image" ui-sref="locations">
@@ -25,6 +26,21 @@
           
 <!--          <ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(item)"></ion-delete-button> -->
         </div>
+
+        <script id="setTrip.html" type="text/ng-template">
+          <ion-popover-view>
+            <ion-content>
+              <div class="list">
+                <a class="item" href="#/todo/edit/{{item.objectId}}/{{item.tripName}}/{{trip.startAt}}/{{trip.endAt}}/{{item.content}}">
+                  Edit
+                </a>
+                <i class="item" ng-click="onItemDelete(item)" target="_blank">
+                  Delete
+                </i>
+              </div>
+            </ion-content>
+          </ion-popover-view>
+        </script>
   </ion-content>
 </ion-view>
 

@@ -1,7 +1,7 @@
 /**
  * Created by Sandeep on 11/09/14.
  */
-angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoListController',['$scope','Todo',function($scope,Todo){
+angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoListController',function($ionicPopover,$scope,Todo){
     
       
     var  currentUser = Parse.User.current().id;
@@ -9,60 +9,29 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
       //$scope.getTrips();
       for (var i = 0; i < data.results.length; i++) {
         data.results[i].imgURL = "http://files.parsetfss.com/c2409cf6-d996-44ce-9d74-930211741549/" + data.results[i].Img_File.name;
-
       };
-      
       $scope.items = data.results;
-
-      //$scope.items = $scope.setURL(data.results);//data undefined?
-      //console.log($scope.items);
     });
 
-    
+    $ionicPopover.fromTemplateUrl('setTrip.html', {
+        scope: $scope,
+    }).then(function(popover) {
+        $scope.popover = popover;
+    });
+
+    $scope.openPopover = function($event, item) {
+      $scope.item = item;
+      $scope.popover.show($event);
+    };
 
     $scope.onItemDelete=function(item){
+
         Todo.delete(item.objectId);
         $scope.items.splice($scope.items.indexOf(item),1);
 
     }
-    $scope.getTrips = function() {
-        var  currentUser = Parse.User.current();
-        var TripsObject = Parse.Object.extend("Todo");
-        var query = new Parse.Query(TripsObject);
-        query.equalTo("createdBy", currentUser);
-        query.find({
-            success: function(results) {
-                //console.log(results);
-                $scope.items = {};
-                //console.log("Successfully retrieved " + results.length + " people!");
-                var object2 = {};
-                for (var i = 0; i < results.length; i++) {
-                  
-                var object = results[i];
-                imgURL = object.get('Img_File').url();
-                //console.log(object.id + ' - ' + object.get("tripName"));
-                
-                object.url = imgURL;
-                //console.log(object.url)
-                //$('#pic')[0].src = imgURL;
-                $scope.picUrl = imgURL;
-                object2[i].Img_File = object.get('Img_File');
-                object2[i].content = object.get('content');
-                object2[i].tripName = object.get("tripName");
-                console.log(object2[i]);
-                $scope.items[i] = object2[i];
-                console.log($scope.items[i]);
-                }
-                
-                //
-            },
-            error: function(error) {
-                alert("Error: " + error.code + " " + error.message);
-            }
-        });
-    };
 
-}]).controller('LocationListController',['$scope','Locations',function($scope,Locations){
+}).controller('LocationListController',['$scope','Locations',function($scope,Locations){
 
     Locations.getAll().success(function(data){
         $scope.items=data.results;
@@ -203,6 +172,27 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
             $state.go('todos');
         });
     };
+
+    $scope.takePicture = function () {
+        var options = {
+          quality: 100,
+          destinationType: Camera.DestinationType.DATA_URL,
+          sourceType: Camera.PictureSourceType.CAMERA,
+          allowEdit: true,
+          encodingType: Camera.EncodingType.JPEG,
+          targetWidth: 300,
+          targetHeight: 300,
+          popoverOptions: CameraPopoverOptions,
+          saveToPhotoAlbum: false
+        };
+   
+        $cordovaCamera.getPicture(options).then(function (imageData) {
+           $scope.imgURI = "data:image/jpeg;base64," + imageData;
+           $scope.imageData = imageData;
+            }, function (err) {
+           // An error occured. Show a message to the user
+        });
+    }
 
 }]).controller('LoginCtrl', function($scope, $state) {
  

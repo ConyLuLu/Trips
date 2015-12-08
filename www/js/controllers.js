@@ -5,20 +5,20 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
     
       
     var  currentUser = Parse.User.current().id;
-    Todo.getAll(currentUser).success(function(data){
+    Todo.getTrips(currentUser).success(function(data){
       //$scope.getTrips();
+      for (var i = 0; i < data.results.length; i++) {
+        data.results[i].imgURL = "http://files.parsetfss.com/c2409cf6-d996-44ce-9d74-930211741549/" + data.results[i].Img_File.name;
 
+      };
+      
       $scope.items = data.results;
+
       //$scope.items = $scope.setURL(data.results);//data undefined?
-      console.log($scope.items);
+      //console.log($scope.items);
     });
 
-    $scope.setURL = function(objects) {
-      for (var i = 0; i < objects.length; i++) {
-        objects[i].imgURL = data.results[i].get('Img_File').url();
-      };
-      return objects;
-    }
+    
 
     $scope.onItemDelete=function(item){
         Todo.delete(item.objectId);

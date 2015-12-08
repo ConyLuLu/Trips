@@ -18,7 +18,7 @@
               <p>{{ item.startAt|date:"MMM,d,yyyy"}} - {{ item.endAt|date:"MMM,dd,yyyy"}}</p>
           </div>
           <a class="item-image" ui-sref="locations">
-            <img src="pics/travel2.jpg">
+            <img src="{{item.imgURL}}">
             <!-- src="pics/travel2.jpg"-->
           </a>
           <div class="item">{{item.content}}</div>

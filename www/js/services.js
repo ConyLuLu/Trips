@@ -3,7 +3,21 @@
  */
 angular.module('todoApp.services',[]).factory('Todo',['$http','PARSE_CREDENTIALS',function($http,PARSE_CREDENTIALS){
     return {
-        getAll:function(userId){
+        getTrips:function(userId){
+            return $http.get('https://api.parse.com/1/classes/Todo',{
+                headers:{
+                    'X-Parse-Application-Id': PARSE_CREDENTIALS.APP_ID,
+                    'X-Parse-REST-API-Key':PARSE_CREDENTIALS.REST_API_KEY,
+                },
+                params:{
+                    "where": {"createdBy":userId},
+                   // "where": {"content":"ss"};
+                    //"where": JSON.stringify({
+                    //    "createdBy1": {"__type":"Pointer","className":"_User","objectId":userId}})
+                }
+            });
+        },
+        getLocations:function(userId){
             return $http.get('https://api.parse.com/1/classes/Todo',{
                 headers:{
                     'X-Parse-Application-Id': PARSE_CREDENTIALS.APP_ID,

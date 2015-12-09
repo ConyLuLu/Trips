@@ -1,4 +1,4 @@
-<ion-view title="Trips">
+<ion-view title="Trips" hide-back-button="true">
   <div class="buttons">
 <!--    <ion-nav-buttons side="left">
       <button class="color-topic button button-icon icon ion-ios7-minus-outline" ng-click="data.showDelete = !data.showDelete;"></button>
@@ -13,13 +13,13 @@
         <div class="card item-text-wrap item item-complex" ng-repeat="item in items | orderBy: '-createdAt'" item="item">
           
           <div class="item item-icon-right">
-              <h2>{{item.tripName}}</h2>
-              <i class="button button-icon icon ion-edit" ng-click="openPopover($event,item)"></i>
-              <!--href="#/todo/edit/{{item.objectId}}/{{item.tripName}}/{{trip.startAt}}/{{trip.endAt}}/{{item.content}}" -->
+              <h2 class="color-trip-topic">{{item.tripName}}</h2>
+              <i class="button button-icon icon ion-ios-more" ng-click="popover.show($event,item)"></i>
               <p>{{ item.startAt|date:"MMM,d,yyyy"}} - {{ item.endAt|date:"MMM,dd,yyyy"}}</p>
           </div>
-          <a class="item-image" ui-sref="locations">
-            <img src="{{item.imgURL}}">
+          <a class="item-image" href="#/locations/{{item.objectId}}">
+            <img class="picholder" ng-show="item.imgURL !== undefined" ng-src="{{item.imgURL}}">
+            <img class="picholder" ng-show="item.imgURL === undefined" ng-src="pics/150x150 add.png" ng-click="takePicture()">
             <!-- src="pics/travel2.jpg"-->
           </a>
           <div class="item">{{item.content}}</div>
@@ -31,12 +31,11 @@
           <ion-popover-view>
             <ion-content>
               <div class="list">
-                <a class="item" href="#/todo/edit/{{item.objectId}}/{{item.tripName}}/{{trip.startAt}}/{{trip.endAt}}/{{item.content}}">
+                <a class="item" href="#/todo/edit/{{item.objectId}}/{{item.tripName}}/{{trip.startAt}}/{{trip.endAt}}/{{item.content}}" ng-click="popover.hide($event,item)">
+                  <i class="button button-icon icon ion-edit"></i>
                   Edit
                 </a>
-                <i class="item" ng-click="onItemDelete(item)" target="_blank">
-                  Delete
-                </i>
+                <i class="item" ng-click="onItemDelete(item)">Delete</i>
               </div>
             </ion-content>
           </ion-popover-view>
@@ -48,8 +47,7 @@
     <ion-nav-view></ion-nav-view>
     <nav mfb-menu position="br" effect="slidein" label="關閉"
       active-icon="ion-close-round" resting-icon="ion-information"
-      toggling-method="click" class="font-set">
+      toggling-method="click" class="font-regular">
       <button mfb-button icon="ion-settings" label="設定" ui-sref="settings"></button>
       <button mfb-button icon="ion-location" label="旅行地圖" ui-sref="map"></button>
-      <button mfb-button icon="ion-location" label="旅行地圖" sng-click="getTrips()"></button>
     </nav>

@@ -52,7 +52,7 @@ angular.module('todoApp', ['ionic','ngCordova','ng-mfb','todoApp.controllers','t
             templateUrl: 'views/map.html',
             controller: 'LoginCtrl'
           }).state('locations', {
-            url: '/locations',
+            url: '/locations/:id',
             templateUrl: 'views/locations.html',
             controller: 'LocationListController'
           }).state('createLocation', {

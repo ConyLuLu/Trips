@@ -4,12 +4,22 @@
 angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoListController',function($ionicPopover,$scope,Todo){
     
       
-    var  currentUser = Parse.User.current().id;
+    var currentUser = Parse.User.current().id;
     Todo.getTrips(currentUser).success(function(data){
       //$scope.getTrips();
       for (var i = 0; i < data.results.length; i++) {
-        data.results[i].imgURL = "http://files.parsetfss.com/c2409cf6-d996-44ce-9d74-930211741549/" + data.results[i].Img_File.name;
-      };
+        if (data.results[i].Img_File !== undefined) {
+          data.results[i].imgURL = "http://files.parsetfss.com/c2409cf6-d996-44ce-9d74-930211741549/" 
+          + data.results[i].Img_File.name;
+
+        }
+
+        else {
+          data.results[i].imgURL = undefined;
+          console.log("in else");
+        }
+              };
+              console.log(data);
       $scope.items = data.results;
     });
 
@@ -19,21 +29,24 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
         $scope.popover = popover;
     });
 
-    $scope.openPopover = function($event, item) {
+    $scope.popover = function($event, item) {
       $scope.item = item;
-      $scope.popover.show($event);
+     // $scope.popover.show($event);
+      $scope.popover = popover;
     };
 
     $scope.onItemDelete=function(item){
 
         Todo.delete(item.objectId);
         $scope.items.splice($scope.items.indexOf(item),1);
+        $scope.popover.hide();
 
     }
 
-}).controller('LocationListController',['$scope','Locations',function($scope,Locations){
+}).controller('LocationListController',['$scope','Todo','$stateParams',function($scope,Todo,$stateParams){
 
-    Locations.getAll().success(function(data){
+    var tripId = $stateParams.id;
+    Todo.getLocations(tripId).success(function(data){
         $scope.items=data.results;
     });
 

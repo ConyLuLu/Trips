@@ -1,13 +1,13 @@
-<ion-view title="Locations">
+<ion-view title="Locations" hide-back-button="true">
   <div class="buttons">
     <ion-nav-buttons side="left">
       <button class="color-topic button button-icon icon ion-ios7-minus-outline" ng-click="data.showDelete = !data.showDelete;"></button>
     </ion-nav-buttons>
     <ion-nav-buttons side="right"> 
-      <button class="button button-clear icon ion-plus-round" ui-sref="createLocation"></button>
+      <button class="button button-clear icon ion-plus-round" ui-sref="createTodo"></button>
     </ion-nav-buttons>
   </div>
-
+<div>
   <ion-content>
     <ion-list show-delete="data.showDelete">
         <ion-item class="list item-text-wrap item item-complex item-thumbnail-left" ng-repeat="item in items | orderBy: '-createdAt'" item="item" >
@@ -17,13 +17,14 @@
           <ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(item)"></ion-delete-button>
         </ion-item>
   </ion-content>
+  </div>
 </ion-view>
 
 
     <ion-nav-view animation="slide-left-right"></ion-nav-view>
     <nav mfb-menu position="br" effect="slidein" label="關閉"
       active-icon="ion-close-round" resting-icon="ion-information"
-      toggling-method="click" class="font-set">
+      toggling-method="click" class="font-regular">
       <button mfb-button icon="ion-settings" label="設定" ui-sref="settings"></button class="font-set">
       <button mfb-button icon="ion-location" label="旅行地圖" ui-sref="map"></button>
       <button mfb-button icon="ion-map" label="旅程" ui-sref="todos"></button>

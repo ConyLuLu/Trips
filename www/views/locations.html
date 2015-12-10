@@ -4,7 +4,7 @@
       <button class="color-topic button button-icon icon ion-ios7-minus-outline" ng-click="data.showDelete = !data.showDelete;"></button>
     </ion-nav-buttons>
     <ion-nav-buttons side="right"> 
-      <button class="button button-clear icon ion-plus-round" ui-sref="createTodo"></button>
+      <a class="button button-clear icon ion-plus-round" href="#/location/new/{{tripId}}"></a>
     </ion-nav-buttons>
   </div>
 <div>
@@ -12,8 +12,11 @@
     <ion-list show-delete="data.showDelete">
         <ion-item class="list item-text-wrap item item-complex item-thumbnail-left" ng-repeat="item in items | orderBy: '-createdAt'" item="item" >
           <img src="pics/coffee.jpg">
-          <h2>{{item.place}}</h2>
-          <span class="item-note">{{item.time}}</span>
+          <h2 class="loc-topic">{{item.place}}</h2>
+          <span class="item-note">
+            <p>{{item.date}}</p>
+            <p>{{item.time}}</p>
+          </span>
           <ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(item)"></ion-delete-button>
         </ion-item>
   </ion-content>

@@ -13,13 +13,13 @@
         <div class="card item-text-wrap item item-complex" ng-repeat="item in items | orderBy: '-createdAt'" item="item">
           
           <div class="item item-icon-right">
-              <h2 class="color-trip-topic">{{item.tripName}}</h2>
-              <i class="button button-icon icon ion-ios-more" ng-click="popover.show($event,item)"></i>
+              <h1 class="trip-topic">{{item.tripName}}</h1>
+              <i class="button button-icon icon ion-more" ng-click="openPopover($event,item)"></i>
               <p>{{ item.startAt|date:"MMM,d,yyyy"}} - {{ item.endAt|date:"MMM,dd,yyyy"}}</p>
           </div>
           <a class="item-image" href="#/locations/{{item.objectId}}">
             <img class="picholder" ng-show="item.imgURL !== undefined" ng-src="{{item.imgURL}}">
-            <img class="picholder" ng-show="item.imgURL === undefined" ng-src="pics/150x150 add.png" ng-click="takePicture()">
+            <img class="picholder" ng-show="item.imgURL === undefined" ng-src="pics/150x150 add.png">
             <!-- src="pics/travel2.jpg"-->
           </a>
           <div class="item">{{item.content}}</div>
@@ -31,11 +31,10 @@
           <ion-popover-view>
             <ion-content>
               <div class="list">
-                <a class="item" href="#/todo/edit/{{item.objectId}}/{{item.tripName}}/{{trip.startAt}}/{{trip.endAt}}/{{item.content}}" ng-click="popover.hide($event,item)">
-                  <i class="button button-icon icon ion-edit"></i>
-                  Edit
+                <a class="item icon ion-edit" href="#/todo/edit/{{item.objectId}}/{{item.tripName}}/{{trip.startAt}}/{{trip.endAt}}/{{item.content}}" ng-click="popover.hide($event,item)">
+                  &nbsp&nbsp Edit
                 </a>
-                <i class="item" ng-click="onItemDelete(item)">Delete</i>
+                <a class="item icon ion-close" ng-click="onItemDelete(item)">&nbsp&nbsp Delete</a>
               </div>
             </ion-content>
           </ion-popover-view>

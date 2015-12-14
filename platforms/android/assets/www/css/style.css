@@ -7,12 +7,14 @@
 	color: gray;
     padding: 5px;
 }
+/*
 .like {
 	color: #ff0000;
 }
 .like:hover {
 	color: #ff0000;
 }
+*/
 .title {
     color: #000000;
 }
@@ -26,9 +28,10 @@
 .color-topic {
     color: white;
  }
-.font-set {
-    font-family: 華康秀風體W3;
-}
+ .color-trip-topic {
+    color: #1aacc3;
+    font-size: 20px;
+ }
 .font-setitle {
     font-family: 微軟正黑體;
     font-weight: bolder;
@@ -43,6 +46,9 @@
     font-size: 20px;
     padding: 5px;
     margin: 5px;
+}
+.ion-popover-view > .content {
+    border-radius: 10px;
 }
 .card .item {
     background-color: #FAFAFA;
@@ -153,4 +159,5 @@
   border-width: 1px;
   border-style: solid;
   font-size: 16px;
+  
 }

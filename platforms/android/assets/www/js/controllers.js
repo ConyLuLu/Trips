@@ -1,21 +1,52 @@
 /**
  * Created by Sandeep on 11/09/14.
  */
-angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoListController',['$scope','Todo',function($scope,Todo){
+angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoListController',function($ionicPopover,$scope,Todo){
+    
+      
+    var currentUser = Parse.User.current().id;
+    Todo.getTrips(currentUser).success(function(data){
+      //$scope.getTrips();
+      for (var i = 0; i < data.results.length; i++) {
+        if (data.results[i].Img_File !== undefined) {
+          data.results[i].imgURL = "http://files.parsetfss.com/c2409cf6-d996-44ce-9d74-930211741549/" 
+          + data.results[i].Img_File.name;
 
-    Todo.getAll().success(function(data){
-        $scope.items=data.results;
+        }
+
+        else {
+          data.results[i].imgURL = undefined;
+          console.log("in else");
+        }
+              };
+              console.log(data);
+      $scope.items = data.results;
     });
 
+    $ionicPopover.fromTemplateUrl('setTrip.html', {
+        scope: $scope,
+    }).then(function(popover) {
+        $scope.popover = popover;
+    });
+
+    $scope.popover = function($event, item) {
+      $scope.item = item;
+     // $scope.popover.show($event);
+      $scope.popover = popover;
+    };
+
     $scope.onItemDelete=function(item){
+
         Todo.delete(item.objectId);
         $scope.items.splice($scope.items.indexOf(item),1);
+        $scope.popover.hide();
 
     }
 
-}]).controller('LocationListController',['$scope','Locations',function($scope,Locations){
+}).controller('LocationListController',['$scope','Todo','$stateParams',function($scope,Todo,$stateParams){
 
-    Locations.getAll().success(function(data){
+    var tripId = $stateParams.id;
+    Todo.getLocations(tripId).success(function(data){
         $scope.items=data.results;
     });
 
@@ -28,7 +59,7 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
 }]).controller('TodoCreationController',function($scope,Todo,$state,$cordovaCamera,$stateParams){
 
     $scope.trip={};
-    var currentUser = Parse.User.current();
+    var currentUser = Parse.User.current().id;
     $scope.create=function(){
         //var trip = new Parse.Object("Todo");
         //trip.set("createdBy", Parse.User.current());
@@ -62,86 +93,78 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
             }, function (err) {
            // An error occured. Show a message to the user
         });
-        var currentUser = Parse.User.current();
-        console.log(currentUser);
     }
     $scope.uploadPhoto = function(){
 
-      var post = Parse.Object.extend("Todo");
-      var newPost = new post();
+      var trip = Parse.Object.extend("Todo");
+      var newTrip = new trip();
         // Creates parse file object you'll notice that you have to convert 
         // $scope.imageData to a base 64 object. 
       var parseFile = new Parse.File('mypic.jpeg',{base64:$scope.imageData});
-      newPost.set("Img_File",parseFile);
-      newPost.set("content",$scope.trip.content);
-      newPost.set("tripName",$scope.trip.tripName);
-      newPost.set("startAt",$scope.trip.startAt);
-      newPost.set("endAt",$scope.trip.endAt);
-      newPost.set("createdBy", currentUser);
-      newPost.save(null,{success:function(){$state.go('locations');},
+      newTrip.set("Img_File",parseFile);
+      newTrip.set("content",$scope.trip.content);
+      newTrip.set("tripName",$scope.trip.tripName);
+      newTrip.set("startAt",$scope.trip.startAt);
+      newTrip.set("endAt",$scope.trip.endAt);
+      newTrip.set("createdBy", currentUser);
+      newTrip.save(null,{success:function(){$state.go('locations');},
         error: function(error){
           alert("error");
         // do whatever 
         }
       });
       console.log(parseFile);
-    }
-
-    $scope.getTrips = function(params) {
-      var TripsObject = Parse.Object.extend("Todo");
-      var query = new Parse.Query(TripsObject);
-      if(params !== undefined) {
-          if(params.createdBy !== undefined) {
-              query.equalTo("lastname", params.createdBy);
-          }
-          if(params.firstname !== undefined) {
-              query.equalTo("firstname", params.lastname);
-          }
-      }
-      query.find({
-          success: function(results) {
-              alert("Successfully retrieved " + results.length + " people!");
-              for (var i = 0; i < results.length; i++) {
-                  var object = results[i];
-                  console.log(object.id + ' - ' + object.get("firstname") + " " + object.get("lastname"));
-              }
-          },
-          error: function(error) {
-              alert("Error: " + error.code + " " + error.message);
-          }
-      });
-  };
+    }    
 }).controller('LocationCreationController',function($scope,Locations,$state,$cordovaCamera,$stateParams){
 
     $scope.loc={};
 
     $scope.create=function(){
-        Locations.create({
-          place:$scope.loc.place,
-          time:$scope.loc.time
-        }).success(function(data){
-            $state.go('locations');
-        });
+        $scope.uploadPhoto();
     }
-    $scope.takePicture = function() {
-        var options = { 
-            quality : 75, 
-            destinationType : Camera.DestinationType.DATA_URL, 
-            sourceType : Camera.PictureSourceType.CAMERA, 
-            allowEdit : true,
-            encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 300,
-            targetHeight: 300,
-            popoverOptions: CameraPopoverOptions,
-            saveToPhotoAlbum: true
+
+    var currentUser = Parse.User.current();
+    
+    $scope.takePicture = function () {
+        var options = {
+          quality: 100,
+          destinationType: Camera.DestinationType.DATA_URL,
+          sourceType: Camera.PictureSourceType.CAMERA,
+          allowEdit: true,
+          encodingType: Camera.EncodingType.JPEG,
+          targetWidth: 300,
+          targetHeight: 300,
+          popoverOptions: CameraPopoverOptions,
+          saveToPhotoAlbum: false
         };
- 
-        $cordovaCamera.getPicture(options).then(function(imageData) {
-            $scope.imgURI = "data:image/jpeg;base64," + imageData;
-        }, function(err) {
-            // An error occured. Show a message to the user
+   
+        $cordovaCamera.getPicture(options).then(function (imageData) {
+           $scope.imgURI = "data:image/jpeg;base64," + imageData;
+           $scope.imageData = imageData;
+            }, function (err) {
+           // An error occured. Show a message to the user
         });
     }
+    $scope.uploadPhoto = function(){
+
+      var trip = Parse.Object.extend("Locations");
+      var newTrip = new trip();
+        // Creates parse file object you'll notice that you have to convert 
+        // $scope.imageData to a base 64 object. 
+      var parseFile = new Parse.File('mypic.jpeg',{base64:$scope.imageData});
+      newTrip.set("Img_File",parseFile);
+      newTrip.set("place",$scope.loc.place);
+      newTrip.set("date",$scope.loc.date);
+      newTrip.set("time",$scope.loc.time);
+      newTrip.set("createdBy", currentUser);
+      newTrip.save(null,{success:function(){$state.go('locations');},
+        error: function(error){
+          alert("error");
+        // do whatever 
+        }
+      });
+      console.log(parseFile);
+    } 
 }).controller('TodoEditController',['$scope','Todo','$state','$stateParams',function($scope,Todo,$state,$stateParams){
     
     $scope.trip={
@@ -162,6 +185,27 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
             $state.go('todos');
         });
     };
+
+    $scope.takePicture = function () {
+        var options = {
+          quality: 100,
+          destinationType: Camera.DestinationType.DATA_URL,
+          sourceType: Camera.PictureSourceType.CAMERA,
+          allowEdit: true,
+          encodingType: Camera.EncodingType.JPEG,
+          targetWidth: 300,
+          targetHeight: 300,
+          popoverOptions: CameraPopoverOptions,
+          saveToPhotoAlbum: false
+        };
+   
+        $cordovaCamera.getPicture(options).then(function (imageData) {
+           $scope.imgURI = "data:image/jpeg;base64," + imageData;
+           $scope.imageData = imageData;
+            }, function (err) {
+           // An error occured. Show a message to the user
+        });
+    }
 
 }]).controller('LoginCtrl', function($scope, $state) {
  
@@ -250,4 +294,32 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
         task.like = true;
 
     }
+  }).controller('MapCtrl', function($scope, $state, $cordovaGeolocation) {
+        
+        var options = {timeout: 10000, enableHighAccuracy: true};
+ 
+        $cordovaGeolocation.getCurrentPosition(options).then(function(position){
+ 
+        var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+ 
+        var mapOptions = {
+          center: latLng,
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+ 
+        $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+           
+        google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+ 
+        var marker = new google.maps.Marker({
+            map: $scope.map,
+            animation: google.maps.Animation.DROP,
+            position: latLng
+        });      
+ 
+      });
+    }, function(error){
+      console.log("Could not get location");
   });
+});

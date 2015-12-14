@@ -35,6 +35,10 @@ angular.module('todoApp', ['ionic','ngCordova','ng-mfb','todoApp.controllers','t
             url:'/todo/edit/:id/:tripName/:startAt/:endAt/:content',
             controller:'TodoEditController',
             templateUrl:'views/edit-todo.html'
+        }).state('editLocation',{
+            url:'/location/edit/:id/:place/:date/:time',
+            controller:'LocationEditController',
+            templateUrl:'views/edit-location.html'
         }).state('signup', {
             url: '/signup',
             templateUrl: 'views/sign-up.html',
@@ -56,7 +60,7 @@ angular.module('todoApp', ['ionic','ngCordova','ng-mfb','todoApp.controllers','t
             templateUrl: 'views/locations.html',
             controller: 'LocationListController'
           }).state('createLocation', {
-            url: '/locations/new',
+            url: '/location/new/:tripId',
             templateUrl: 'views/create-location.html',
             controller: 'LocationCreationController'
           });

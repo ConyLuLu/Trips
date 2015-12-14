@@ -60,6 +60,15 @@ angular.module('todoApp.services',[]).factory('Todo',['$http','PARSE_CREDENTIALS
                 }
             });
         },
+        deleteLocation:function(id){
+            return $http.delete('https://api.parse.com/1/classes/Locations/'+id,{
+                headers:{
+                    'X-Parse-Application-Id': PARSE_CREDENTIALS.APP_ID,
+                    'X-Parse-REST-API-Key':PARSE_CREDENTIALS.REST_API_KEY,
+                    'Content-Type':'application/json'
+                }
+            });
+        },
 
         uploadImg:function() {
             return $http.delete('https://api.parse.com/1/classes/Todo/'+id,{

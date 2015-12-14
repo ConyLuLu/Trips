@@ -28,15 +28,26 @@
 .color-topic {
     color: white;
  }
- .color-trip-topic {
+.trip-topic {
     color: #1aacc3;
-    font-size: 20px;
+    font-size: 18px;
+    font-family: 微软雅黑, 微軟正黑體;
+    font-weight: bolder;
+ }
+ .trip-content {
+    font-family: 微軟正黑體;
+ }
+ .loc-topic {
+    font-size: 18px;
+    font-family: 微软雅黑, 微軟正黑體;
  }
 .font-setitle {
     font-family: 微軟正黑體;
-    font-weight: bolder;
+    font-weight: bold;
 }
-.font-regular {
+.font-regular,
+ion-list > label > span,
+ion-list > label > input {
     font-family: 微軟正黑體;
 }
 .font-regular label span {
@@ -50,9 +61,6 @@
 .ion-popover-view > .content {
     border-radius: 10px;
 }
-.card .item {
-    background-color: #FAFAFA;
- }
 .radius {
     border-radius: 50px;
 }
@@ -63,7 +71,6 @@
 
 /*signin page*/
 #infolist {
-    //margin:1500px;
     border-radius: 5px;
 }
 #loginbtn {
@@ -75,7 +82,7 @@
     border-radius: 5px;
     padding: 5px;
 }
-/*signin page*/
+/*login page*/
 
 .login {
     border-radius: 5px;
@@ -88,12 +95,62 @@
 .show {
     border-radius: 1px red;
 }
-.picholder {
+.picholder.edit {
   display: block;
   margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+/*Todos popover Page*/
+.popover {
+    height: auto !important;
+}
+.popover ion-header-bar {
+    position: relative;
+}
+.popover ion-content {
+    top: 0;
+    position: relative;
+}
+/*Location page*/
+.item-content{
+    display: -webkit-box !important;
+    display: -moz-box !important;
+    display: -ms-flexbox !important;
+    display: -webkit-flex !important;
+    display: flex !important;
+    
+   -webkit-box-direction: normal !important;
+    -moz-box-direction: normal !important;
+    -webkit-box-orient: horizontal !important;
+    -moz-box-orient: horizontal !important;
+    -webkit-flex-direction: row !important;
+    -ms-flex-direction: row !important;
+    flex-direction: row !important;
+   
+    -webkit-box-pack: justify  !important;
+    -moz-box-pack: justify  !important;
+    -webkit-justify-content: space-between !important;
+    -ms-flex-pack: justify !important;
+    justify-content: space-between !important;
+    -webkit-align-content: stretch !important;
+    -ms-flex-line-pack: stretch !important;
+    align-content: stretch !important;
+  
+    -webkit-box-align: center !important;
+    -moz-box-align: center !important;
+    -webkit-align-items: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+  
+  
+  .item-note{
+    position:initial !important;
+    display: inline !important;
+    top: initial !important;
+    right: initial !important;
+  }
 }
 /*-------------Cony--------------*/
 #map {
@@ -108,6 +165,7 @@
     height: 300px;
     border-radius: 50%;
     padding: 15px;
+    border: 1px red;
 }
 .tab-item{
     border-radius: 5px;
@@ -153,18 +211,4 @@
     left:5px;
     top: 15px;
     font-size: 15px;
-}
-.list-card > .item {
-  border-color: #ddd;
-  background-color: #fff;
-  color: #444;
-  position: relative;
-  z-index: 2;
-  display: block;
-  margin: -1px;
-  padding: 16px;
-  border-width: 1px;
-  border-style: solid;
-  font-size: 16px;
-  
 }

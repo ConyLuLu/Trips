@@ -1,23 +1,22 @@
-<ion-view title="New Location">
+<ion-view title="Edit">
     <ion-nav-buttons side="right"> 
-      <button class="button button-clear font-regular" ng-click="create()">新增</button>
+      <button class="button button-clear" ng-click="edit()">確定</button>
     </ion-nav-buttons>
-
-    <ion-content>
+<ion-content class="has-header">
         <img class="picholder edit" ng-show="imgURI !== undefined" ng-src="{{imgURI}}" ng-click="takePicture()">
         <img class="picholder edit" ng-show="imgURI === undefined" ng-src="pics/150x150 add.png" ng-click="takePicture()">
-        <ion-list>
+        <ion-list class="font-regular">
             <label class="item item-input ">
                 <span class="input-label">地點</span>
-                <input type="text" placeholder="旅行地點" ng-model="loc.place">
+                <input type="text" placeholder="旅行地點" ng-model="location.place">
             </label>
             <label class="item item-input">
                 <span class="input-label">日期</span>
-                <input class="font-regular" type="date" ng-model="loc.date">
+                <input class="font-regular" type="date" ng-model="location.date">
             </label>
             <label class="item item-input">
                 <span class="input-label">時間</span>
-                <input class="font-regular" type="time" ng-model="loc.time">
+                <input class="font-regular" type="time" ng-model="location.time">
             </label>
         </ion-list>
-    </ion-content>
+</ion-content>

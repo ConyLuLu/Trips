@@ -11,7 +11,6 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
           if (data.results[i].Img_File !== undefined) {
             data.results[i].imgURL = "http://files.parsetfss.com/c2409cf6-d996-44ce-9d74-930211741549/" 
             + data.results[i].Img_File.name;
-            console.log((data.results[i].Img_File.name));
           }
           else {
             data.results[i].imgURL = undefined;
@@ -45,6 +44,17 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
 
     $scope.tripId = $stateParams.id;
     Todo.getLocations($scope.tripId).success(function(data){
+        for (var i = 0; i < data.results.length; i++) {
+          if (data.results[i].Img_File !== undefined) {
+            data.results[i].imgURL = "http://files.parsetfss.com/c2409cf6-d996-44ce-9d74-930211741549/" 
+            + data.results[i].Img_File.name;
+          }
+          else {
+            data.results[i].imgURL = undefined;
+            console.log("in else");
+          }
+
+      };
         $scope.items=data.results;
     });
 
@@ -160,6 +170,7 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
         content:$stateParams.content
       };
 
+          console.log($scope.trip.startAt);
     $scope.edit=function(){
         Todo.edit($scope.trip.id,{
             tripName:$scope.trip.tripName,
@@ -168,6 +179,46 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
             content:$scope.trip.content
           }).success(function(data){
             $state.go('todos');
+        });
+    };
+
+    $scope.takePicture = function () {
+        var options = {
+          quality: 100,
+          destinationType: Camera.DestinationType.DATA_URL,
+          sourceType: Camera.PictureSourceType.CAMERA,
+          allowEdit: true,
+          encodingType: Camera.EncodingType.JPEG,
+          targetWidth: 300,
+          targetHeight: 300,
+          popoverOptions: CameraPopoverOptions,
+          saveToPhotoAlbum: false
+        };
+   
+        $cordovaCamera.getPicture(options).then(function (imageData) {
+           $scope.imgURI = "data:image/jpeg;base64," + imageData;
+           $scope.imageData = imageData;
+            }, function (err) {
+           // An error occured. Show a message to the user
+        });
+    }
+
+}]).controller('LocationEditController',['$scope','Todo','$state','$stateParams',function($scope,Todo,$state,$stateParams){
+    
+    $scope.location={
+        id:$stateParams.id,
+        place:$stateParams.place,
+        date:$stateParams.date,
+        time:$stateParams.time
+      };
+
+    $scope.edit=function(){
+        Todo.edit($scope.location.id,{
+            place:$scope.location.place,
+            date:$scope.location.date,
+            time:$scope.location.time
+          }).success(function(data){
+            $state.go('locations');
         });
     };
 
@@ -241,8 +292,7 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
     $ionicModal.fromTemplateUrl('new-task.html', function(modal) {
       $scope.taskModal = modal;
     }, {
-      scope: $scope,
-      //animation: 'slide-in-up'
+      scope: $scope
     });
 
     // Called when the form is submitted

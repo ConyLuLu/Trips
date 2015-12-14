@@ -3,8 +3,8 @@
       <button class="button button-clear" ng-click="edit()">確定</button>
     </ion-nav-buttons>
 <ion-content class="has-header">
-    <img class="picholder" ng-show="imgURI !== undefined" ng-src="{{imgURI}}" ng-click="takePicture()">
-    <img class="picholder" ng-show="imgURI === undefined" ng-src="pics/150x150 add.png" ng-click="takePicture()">
+    <img class="picholder edit" ng-show="imgURI !== undefined" ng-src="{{imgURI}}" ng-click="takePicture()">
+    <img class="picholder edit" ng-show="imgURI === undefined" ng-src="pics/150x150 add.png" ng-click="takePicture()">
     <ion-list>
         <label class="item item-input">
             <span class="input-label">名稱</span>

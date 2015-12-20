@@ -6,10 +6,12 @@
         <img class="picholder edit" ng-show="imgURI !== undefined" ng-src="{{imgURI}}" ng-click="takePicture()">
         <img class="picholder edit" ng-show="imgURI === undefined" ng-src="pics/150x150 add.png" ng-click="takePicture()">
         <ion-list class="font-regular">
-            <label class="item item-input ">
-                <span class="input-label">地點</span>
-                <input type="text" placeholder="旅行地點" ng-model="location.place">
-            </label>
+             <span class="input-label">地點</span>
+                <select ng-model="location.place">  
+                    <option ng-repeat="x in names" >
+                        {{ x.name}}
+                    </option>
+                </select>        
             <label class="item item-input">
                 <span class="input-label">日期</span>
                 <input class="font-regular" type="date" ng-model="location.date">

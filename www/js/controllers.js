@@ -143,11 +143,7 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
            // An error occured. Show a message to the user
         });
     }
-    var lat = "25.03925";
-    var lng = "121.525";
-    var url = "http://163.21.235.61/~koi/getLocation.php?lat=25.03925&lng=121.525&radius=500";
-    $http.get(url).then(function(response) {$scope.names = response.data.results;});
-    
+
     $scope.uploadPhoto = function(){
 
       var trip = Parse.Object.extend("Locations");
@@ -168,6 +164,11 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
       });
 
     } 
+    //Get Location
+    var lat = "25.03925";
+    var lng = "121.525";
+    var url = "http://163.21.235.61/~koi/getLocation.php?lat=25.03925&lng=121.525&radius=500";
+    $http.get(url).then(function(response) {$scope.names = response.data.results;});
 }).controller('TodoEditController',['$scope','Todo','$state','$stateParams',function($scope,Todo,$state,$stateParams){
     
     $scope.trip={
@@ -225,7 +226,7 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
     $http.get(url).then(function(response) {$scope.names = response.data.results;});
 
     $scope.edit=function(){
-        Todo.edit($scope.location.id,{
+        Todo.editLocation($scope.location.id,{
             place:$scope.location.place,
             date:$scope.location.date,
             time:$scope.location.time

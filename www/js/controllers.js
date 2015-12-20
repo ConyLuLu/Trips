@@ -68,7 +68,7 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
 
     $scope.trip={};
     var currentUser = Parse.User.current().id;
-    
+
     $scope.takePicture = function () {
         var options = {
           quality: 100,
@@ -109,8 +109,11 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
           }
         });
         console.log(parseFile);
+    }
+     $scope.create=function(){
+        $scope.uploadPhoto();
     }    
-}).controller('LocationCreationController',function($scope,Locations,$state,$cordovaCamera,$stateParams){
+}).controller('LocationCreationController',function($scope,Locations,$state,$cordovaCamera,$stateParams,$http){
 
     var currentTrip = $stateParams.tripId;
     var currentUser = Parse.User.current();
@@ -140,6 +143,11 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
            // An error occured. Show a message to the user
         });
     }
+    var lat = "25.03925";
+    var lng = "121.525";
+    var url = "http://163.21.235.61/~koi/getLocation.php?lat=25.03925&lng=121.525&radius=500";
+    $http.get(url).then(function(response) {$scope.names = response.data.results;});
+    
     $scope.uploadPhoto = function(){
 
       var trip = Parse.Object.extend("Locations");
@@ -203,7 +211,7 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
         });
     }
 
-}]).controller('LocationEditController',['$scope','Todo','$state','$stateParams',function($scope,Todo,$state,$stateParams){
+}]).controller('LocationEditController',['$scope','Todo','$state','$stateParams','$http',function($scope,Todo,$state,$stateParams,$http){
     
     $scope.location={
         id:$stateParams.id,
@@ -211,6 +219,10 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
         date:$stateParams.date,
         time:$stateParams.time
       };
+    var lat = "25.03925";
+    var lng = "121.525";
+    var url = "http://163.21.235.61/~koi/getLocation.php?lat=25.03925&lng=121.525&radius=500";
+    $http.get(url).then(function(response) {$scope.names = response.data.results;});
 
     $scope.edit=function(){
         Todo.edit($scope.location.id,{

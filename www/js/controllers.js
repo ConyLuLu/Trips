@@ -165,10 +165,9 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
 
     } 
     //Get Location
-    var lat = "25.03925";
-    var lng = "121.525";
     var url = "http://163.21.235.61/~koi/getLocation.php?lat=25.03925&lng=121.525&radius=500";
     $http.get(url).then(function(response) {$scope.names = response.data.results;});
+
 }).controller('TodoEditController',['$scope','Todo','$state','$stateParams',function($scope,Todo,$state,$stateParams){
     
     $scope.trip={

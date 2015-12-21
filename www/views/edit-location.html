@@ -8,11 +8,13 @@
         <ion-list class="font-regular">
             <label class="item item-input">
                 <span> 地點</span>
-                    <select ng-model="location.place">  
-                        <option ng-repeat="x in names">
-                            {{ x.name}}
-                        </option>
-                    </select>  
+                    <div class="menu-select">
+                        <select ng-model="location.place">  
+                            <option ng-repeat="x in names">
+                                {{ x.name}}
+                            </option>
+                        </select>
+                    </div>      
             </label>             
             <label class="item item-input">
                 <span class="input-label">日期</span>

@@ -153,12 +153,18 @@ ion-list > label > input {
   }
 }
 /*-------------Cony--------------*/
+/*map*/
 #map {
     height: 100%;
     width: 100%;
 }
 .scroll {
     height: 100%;
+}
+.menu-select select{
+    border-style:hidden;
+    margin-left:10%; 
+    margin-top:10px;
 }
 #logoimg {
     width: 300px;

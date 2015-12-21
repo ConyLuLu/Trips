@@ -36,7 +36,7 @@ angular.module('todoApp', ['ionic','ngCordova','ng-mfb','todoApp.controllers','t
             controller:'TodoEditController',
             templateUrl:'views/edit-todo.html'
         }).state('editLocation',{
-            url:'/location/edit/:id/:place/:date/:time',
+            url:'/location/edit/:id/:place/:date/:time/:imgURL',
             controller:'LocationEditController',
             templateUrl:'views/edit-location.html'
         }).state('signup', {

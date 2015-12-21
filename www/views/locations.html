@@ -9,8 +9,8 @@
   </div>
   <ion-content>
     <ion-list show-delete="data.showDelete">
-        <ion-item class="item-text-wrap item item-complex item-thumbnail-left" ng-repeat="item in items | orderBy: '-createdAt'" item="item" href="#/location/edit/{{item.objectId}}/{{item.place}}/{{item.date}}/{{item.time}}">
-            <img class="picholder item-image rounded" ng-show="item.imgURL !== undefined" ng-src="{{item.imgURL}}">
+        <ion-item class="item-text-wrap item item-complex item-thumbnail-left" ng-repeat="item in items | orderBy: '-createdAt'" item="item" href="#/location/edit/{{item.objectId}}/{{item.place}}/{{item.date}}/{{item.time}}/{{item.imgURL}}">
+            <img class="picholder item-image rounded" ng-show="item.imgURL !== undefined" ng-src="http://files.parsetfss.com/c2409cf6-d996-44ce-9d74-930211741549/{{item.imgURL}}">
             <img class="picholder item-image rounded" ng-show="item.imgURL === undefined" ng-src="pics/150x150 add.png">
             <h2 class="loc-topic">{{item.place}}</h2>
             <span class="item-note">

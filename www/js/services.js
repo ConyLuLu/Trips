@@ -80,11 +80,11 @@ angular.module('todoApp.services',[]).factory('Todo',['$http','PARSE_CREDENTIALS
         },
 
         uploadImg:function() {
-            return $http.delete('https://api.parse.com/1/classes/Todo/'+id,{
+            return $http.post('https://api.parse.com/1/files/mypic.jpg'+id,{
                 headers:{
                     'X-Parse-Application-Id': PARSE_CREDENTIALS.APP_ID,
                     'X-Parse-REST-API-Key':PARSE_CREDENTIALS.REST_API_KEY,
-                    'Content-Type': 'image/jpeg'
+                    'Content-Type': 'image/jpg'
                 }
             });
         }

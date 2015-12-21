@@ -9,8 +9,7 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
       //$scope.getTrips();
       for (var i = 0; i < data.results.length; i++) {
           if (data.results[i].Img_File !== undefined) {
-            data.results[i].imgURL = "http://files.parsetfss.com/c2409cf6-d996-44ce-9d74-930211741549/" 
-            + data.results[i].Img_File.name;
+            data.results[i].imgURL = data.results[i].Img_File.name;
           }
           else {
             data.results[i].imgURL = undefined;
@@ -46,8 +45,7 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
     Todo.getLocations($scope.tripId).success(function(data){
         for (var i = 0; i < data.results.length; i++) {
           if (data.results[i].Img_File !== undefined) {
-            data.results[i].imgURL = "http://files.parsetfss.com/c2409cf6-d996-44ce-9d74-930211741549/" 
-            + data.results[i].Img_File.name;
+            data.results[i].imgURL = data.results[i].Img_File.name;
           }
           else {
             data.results[i].imgURL = undefined;
@@ -167,7 +165,6 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
     //Get Location
     var url = "http://163.21.235.61/~koi/getLocation.php?lat=25.03925&lng=121.525&radius=500";
     $http.get(url).then(function(response) {$scope.names = response.data.results;});
-
 }).controller('TodoEditController',['$scope','Todo','$state','$stateParams',function($scope,Todo,$state,$stateParams){
     
     $scope.trip={
@@ -211,20 +208,22 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
         });
     }
 
-}]).controller('LocationEditController',['$scope','Todo','$state','$stateParams','$http',function($scope,Todo,$state,$stateParams,$http){
+}]).controller('LocationEditController',function($scope,Todo,$state,$stateParams,$http,$cordovaCamera){
     
     $scope.location={
+        imgURL: "http://files.parsetfss.com/c2409cf6-d996-44ce-9d74-930211741549/" + $stateParams.imgURL,
         id:$stateParams.id,
         place:$stateParams.place,
         date:$stateParams.date,
         time:$stateParams.time
       };
+      console.log($scope.location.imgURL);
     var lat = "25.03925";
     var lng = "121.525";
     var url = "http://163.21.235.61/~koi/getLocation.php?lat=25.03925&lng=121.525&radius=500";
     $http.get(url).then(function(response) {$scope.names = response.data.results;});
 
-    $scope.edit=function(){
+    $scope.editLocation=function(){
         Todo.editLocation($scope.location.id,{
             place:$scope.location.place,
             date:$scope.location.date,
@@ -248,14 +247,29 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
         };
    
         $cordovaCamera.getPicture(options).then(function (imageData) {
-           $scope.imgURI = "data:image/jpeg;base64," + imageData;
+           $scope.location.imgURL = "data:image/jpeg;base64," + imageData;
            $scope.imageData = imageData;
             }, function (err) {
            // An error occured. Show a message to the user
         });
     }
+    $scope.uploadPhoto = function(){
 
-}]).controller('LoginCtrl', function($scope, $state) {
+      var trip = Parse.Object.extend("Locations");
+      var newTrip = new trip();
+      var parseFile = new Parse.File('mypic.jpeg',{base64:$scope.imageData});
+      newTrip.set("Img_File",parseFile);
+      newTrip.save(null,{success:function(){ $state.go('locations'); },
+        error: function(error){
+          alert("error");
+        // do whatever 
+        }
+
+      });
+
+    }
+
+}).controller('LoginCtrl', function($scope, $state) {
  
     $scope.data = {};
    

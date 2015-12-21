@@ -14,7 +14,7 @@
               <p>{{ item.startAt|date:"MMM,d,yyyy"}} - {{ item.endAt|date:"MMM,dd,yyyy"}}</p>
           </div>
           <a class="item-image" href="#/locations/{{item.objectId}}">
-            <img class="picholder" ng-show="item.imgURL !== undefined" ng-src="{{item.imgURL}}">
+            <img class="picholder" ng-show="item.imgURL !== undefined" ng-src="http://files.parsetfss.com/c2409cf6-d996-44ce-9d74-930211741549/{{item.imgURL}}">
             <img class="picholder" ng-show="item.imgURL === undefined" ng-src="pics/150x150 add.png">
           </a>
           <div class="item trip-content">{{item.content}}</div>

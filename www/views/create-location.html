@@ -10,11 +10,15 @@
             <label class="item item-input">
             <span>地點</span>
                 <div class="menu-select">
-                    <select ng-model="loc.place">  
-                        <option ng-repeat="x in names" >
-                            {{ x.name}}
-                        </option>
-                    </select> 
+                    <div class="menu-select">
+                    <div class="menu-select">
+                        <select ng-model="location.place">  
+                            <option ng-repeat="x in names">
+                                {{ x.name}}
+                            </option>
+                        </select>
+                    </div>    
+                </div>    
                 </div>    
             </label>                      
             <label class="item item-input">

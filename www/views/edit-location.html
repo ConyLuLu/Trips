@@ -3,7 +3,7 @@
       <button class="button button-clear" ng-click="edit()">確定</button>
     </ion-nav-buttons>
 <ion-content class="has-header">
-        <img class="picholder edit img-s" ng-show="location.imgURL !== undefined" ng-src="{{location.imgURL}}" ng-click="takePicture()">
+        <img class="picholder edit img-s rounded" ng-show="location.imgURL !== undefined" ng-src="{{location.imgURL}}" ng-click="takePicture()">
         <img class="picholder edit" ng-show="location.imgURL === undefined" ng-src="pics/150x150 add.png" ng-click="takePicture()">
         <ion-list class="font-regular">
             <label class="item item-input">

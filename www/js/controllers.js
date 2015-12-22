@@ -165,9 +165,10 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
     //Get Location
     var url = "http://163.21.235.61/~koi/getLocation.php?lat=25.03925&lng=121.525&radius=500";
     $http.get(url).then(function(response) {$scope.names = response.data.results;});
-}).controller('TodoEditController',['$scope','Todo','$state','$stateParams',function($scope,Todo,$state,$stateParams){
+}).controller('TodoEditController',function($scope,Todo,$state,$stateParams,$http,$cordovaCamera){
     
     $scope.trip={
+        imgURL:"http://files.parsetfss.com/c2409cf6-d996-44ce-9d74-930211741549/"+$stateParams.imgURL,
         id:$stateParams.id,
         tripName:$stateParams.tripName,
         startAt:$stateParams.startAt,
@@ -201,14 +202,14 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
         };
    
         $cordovaCamera.getPicture(options).then(function (imageData) {
-           $scope.imgURI = "data:image/jpeg;base64," + imageData;
+           $scope.imgURL = "data:image/jpeg;base64," + imageData;
            $scope.imageData = imageData;
             }, function (err) {
            // An error occured. Show a message to the user
         });
     }
 
-}]).controller('LocationEditController',function($scope,Todo,$state,$stateParams,$http,$cordovaCamera){
+}).controller('LocationEditController',function($scope,Todo,$state,$stateParams,$http,$cordovaCamera){
     
     $scope.location={
         imgURL: "http://files.parsetfss.com/c2409cf6-d996-44ce-9d74-930211741549/" + $stateParams.imgURL,

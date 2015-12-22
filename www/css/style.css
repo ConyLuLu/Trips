@@ -163,6 +163,10 @@ button {
     padding-bottom: 10px;
     padding-top: 10px;
 }
+.img-sq {
+    width: 300px;
+    height:200px;
+}
 /*-------------Cony--------------*/
 /*map*/
 #map {

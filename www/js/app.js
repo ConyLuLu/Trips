@@ -23,6 +23,7 @@ angular.module('todoApp', ['ionic','ngCordova','ng-mfb','todoApp.controllers','t
 
   });
 }).config(function($stateProvider, $urlRouterProvider){
+        //$ionicConfigProvider.views.transition('none');
         $stateProvider.state('todos',{
            url:'/todos',
            controller:'TodoListController',

@@ -146,11 +146,17 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
 
       var trip = Parse.Object.extend("Locations");
       var newTrip = new trip();
-      var parseFile = new Parse.File('mypic.jpeg',{base64:$scope.imageData});
-      newTrip.set("Img_File",parseFile);
+     
+      if ($scope.imageData!= undefined) {
+         var parseFile = new Parse.File('mypic.jpeg',{base64:$scope.imageData});
+        newTrip.set("Img_File",parseFile);
+        console.log($scope.imageData);
+      };
+      
       newTrip.set("place",$scope.loc.place);
       newTrip.set("date",$scope.loc.date);
       newTrip.set("time",$scope.loc.time);
+      newTrip.set("comment",$scope.loc.comment);
       newTrip.set("createdBy", currentUser);
       newTrip.set("TripId", currentTrip);
       newTrip.save(null,{success:function(){ $state.go('locations'); },
@@ -175,8 +181,8 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
         endAt:$stateParams.endAt,
         content:$stateParams.content
       };
-
-          console.log($scope.trip.startAt);
+    if ($stateParams.imgURL === "") {$scope.location.imgURL = undefined;}
+    
     $scope.edit=function(){
         Todo.edit($scope.trip.id,{
             tripName:$scope.trip.tripName,
@@ -218,7 +224,7 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
         date:$stateParams.date,
         time:$stateParams.time
       };
-      console.log($scope.location.imgURL);
+    if ($stateParams.imgURL === "") {$scope.location.imgURL = undefined;}
     var lat = "25.03925";
     var lng = "121.525";
     var url = "http://163.21.235.61/~koi/getLocation.php?lat=25.03925&lng=121.525&radius=500";

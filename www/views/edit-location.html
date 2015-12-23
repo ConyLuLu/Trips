@@ -11,7 +11,7 @@
                     <div class="menu-select">
                         <select ng-model="location.place">  
                             <option ng-repeat="x in names">
-                                {{ x.name}}
+                                {{x.name}}{{Img}}
                             </option>
                         </select>
                     </div>      
@@ -23,6 +23,10 @@
             <label class="item item-input">
                 <span class="input-label">時間</span>
                 <input class="font-regular" type="time" ng-model="location.time">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">時間</span>
+                <input type="text" class="font-regular" ng-model="location.comment">
             </label>
         </ion-list>
 </ion-content>

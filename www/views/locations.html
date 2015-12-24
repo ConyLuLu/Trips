@@ -9,16 +9,25 @@
   </div>
   <ion-content>
     <ion-list show-delete="data.showDelete">
-        <ion-item class="item-text-wrap item item-complex item-thumbnail-left" ng-repeat="item in items | orderBy: '-createdAt'" item="item" href="#/location/edit/{{item.objectId}}/{{item.place}}/{{item.date}}/{{item.time}}/{{item.imgURL}}">
-            <img class="picholder item-image rounded" ng-show="item.imgURL !== undefined" ng-src="http://files.parsetfss.com/c2409cf6-d996-44ce-9d74-930211741549/{{item.imgURL}}">
-            <img class="picholder item-image rounded" ng-show="item.imgURL === undefined" ng-src="pics/150x150 add.png">
-            <h2 class="loc-topic">{{item.place}}</h2>
-            <span class="item-note">
-              <p>{{item.date}}</p>
-              <p>{{item.time}}</p>
-              <p>{{item.commemt}}</p>
-            </span>
-            <ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(item)"></ion-delete-button>
+        <ion-item class="item-text-wrap item item-complex item-thumbnail-left" ng-repeat="item in items | orderBy: '-createdAt'" item="item" href="#/location/edit/{{item.objectId}}/{{item.place}}/{{item.date}}/{{item.time}}/{{item.imgURL}}/{{item.comment}}">
+            <div class="row">
+              <div class="">
+                <img class="picholder item-image rounded" ng-show="item.imgURL !== undefined" ng-src="http://files.parsetfss.com/c2409cf6-d996-44ce-9d74-930211741549/{{item.imgURL}}">
+                <img class="picholder item-image rounded" ng-show="item.imgURL === undefined" ng-src="pics/150x150 add.png">
+              </div><!-- 
+              <div class="col col-10 timeline-col">
+                  <div class="timeline"></div>
+              </div> -->
+              <div class="col col-67 timeline-col">
+                <h2 class="loc-topic">{{item.place}}</h2>
+                <p>{{item.comment}}</p>
+              </div>
+              <span class="item-note col col-33">
+                <p>{{item.date|date:"MMM,d"}}</p>
+                <p>{{item.time}}</p>
+              </span>
+              <ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(item)"></ion-delete-button>
+            </div>
         </ion-item>
   </ion-content>
 </ion-view>

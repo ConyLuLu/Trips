@@ -48,8 +48,12 @@
 .font-regular,
 ion-list > label > span,
 ion-list > label > input,
+ion-list > label > textarea,
 button {
     font-family: 微軟正黑體;
+}
+.textarea.placeholder {
+    padding:3px;
 }
 .button-icon {
     margin-right: 5px;
@@ -164,6 +168,22 @@ button {
 .img-sq {
     width: 300px;
     height:200px;
+}
+/*font size*/
+.font-s {
+    font-size: 5px;
+}
+/*timeline col*/
+.timeline{
+  width: 1px;
+  height: 70px;
+  background-color: lightgrey;
+  margin: 0 auto;
+  display: block;
+  border-radius: 1px;
+}
+.timeline-col {
+    padding: 0;
 }
 /*-------------Cony--------------*/
 /*map*/

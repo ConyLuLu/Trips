@@ -222,7 +222,8 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
         id:$stateParams.id,
         place:$stateParams.place,
         date:$stateParams.date,
-        time:$stateParams.time
+        time:$stateParams.time,
+        comment:$stateParams.comment
       };
     if ($stateParams.imgURL === "") {$scope.location.imgURL = undefined;}
     var lat = "25.03925";
@@ -234,7 +235,8 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
         Todo.editLocation($scope.location.id,{
             place:$scope.location.place,
             date:$scope.location.date,
-            time:$scope.location.time
+            time:$scope.location.time,
+            comment:$scope.location.comment
           }).success(function(data){
             $state.go('locations');
         });

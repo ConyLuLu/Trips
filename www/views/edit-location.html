@@ -1,6 +1,6 @@
 <ion-view title="Edit">
     <ion-nav-buttons side="right"> 
-      <button class="button button-clear" ng-click="edit()">確定</button>
+      <button class="button button-clear" ng-click="editLocation()">確定</button>
     </ion-nav-buttons>
 <ion-content class="has-header">
         <img class="picholder edit img-s rounded" ng-show="location.imgURL !== undefined" ng-src="{{location.imgURL}}" ng-click="takePicture()">
@@ -24,9 +24,8 @@
                 <span class="input-label">時間</span>
                 <input class="font-regular" type="time" ng-model="location.time">
             </label>
-            <label class="item item-input">
-                <span class="input-label">時間</span>
-                <input type="text" class="font-regular" ng-model="location.comment">
+            <label class="item item-input item-stacked-label">
+                <textarea type="text" name="content" rows="10" ng-model="location.comment"  placeholder="簡短敘述" required></textarea>
             </label>
         </ion-list>
 </ion-content>

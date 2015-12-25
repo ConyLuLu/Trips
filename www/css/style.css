@@ -196,8 +196,8 @@ button {
 }
 .menu-select select{
     border-style:hidden;
-    margin-left:10%; 
-    margin-top:10px;
+    /*position: fixed;*/
+    max-width: 300px; 
 }
 #logoimg {
     width: 300px;

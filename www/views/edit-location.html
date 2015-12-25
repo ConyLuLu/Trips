@@ -11,7 +11,8 @@
                 <span class="input-label"> 地點</span>
                     <div class="menu-select">
                         <select ng-model="location.place">  
-                            <option ng-repeat="x in names" value="{{place}}">
+                            <option>{{place}}</option>
+                            <option ng-repeat="x in names">
                                 {{x.name}}{{Img}}
                             </option>
                         </select>

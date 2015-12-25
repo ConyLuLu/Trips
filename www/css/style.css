@@ -160,6 +160,9 @@ button {
     right: initial !important;
   }
 }
+time {
+    color: lightgrey;
+}
 /*-------------img size----------*/
 .img-s {
     width: 300px;

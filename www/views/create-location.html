@@ -4,8 +4,8 @@
     </ion-nav-buttons>
 
     <ion-content>
-        <img class="picholder edit" ng-show="imgURI !== undefined" ng-src="{{imgURI}}" ng-click="takePicture()">
-        <img class="picholder edit" ng-show="imgURI === undefined" ng-src="pics/150x150 add.png" ng-click="takePicture()">
+        <img class="picholder edit rounded" ng-show="imgURI !== undefined" ng-src="{{imgURI}}" ng-click="takePicture()">
+        <img class="picholder edit rounded" ng-show="imgURI === undefined" ng-src="pics/150x150 add.png" ng-click="takePicture()">
         <ion-list> 
             <label class="item item-input">
             <span>地點</span>
@@ -29,7 +29,8 @@
                 <span class="input-label">時間</span>
                 <input class="font-regular" type="time" ng-model="loc.time">
             </label>
-            <textarea type="text" name="content" rows="10" ng-model="location.comment"  placeholder="簡短敘述" required></textarea>
+            <label class="item item-input item-stacked-label">
+                <textarea type="text" name="content" rows="10" ng-model="location.comment"  placeholder="簡短敘述" required></textarea>
             </label>
         </ion-list>
     </ion-content>

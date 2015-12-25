@@ -14,15 +14,12 @@
               <div class="">
                 <img class="picholder item-image rounded" ng-show="item.imgURL !== undefined" ng-src="http://files.parsetfss.com/c2409cf6-d996-44ce-9d74-930211741549/{{item.imgURL}}">
                 <img class="picholder item-image rounded" ng-show="item.imgURL === undefined" ng-src="pics/150x150 add.png">
-              </div><!-- 
-              <div class="col col-10 timeline-col">
-                  <div class="timeline"></div>
-              </div> -->
+              </div>
               <div>
                 <h2 class="loc-topic">{{item.place}}</h2>
-                <span><time>{{item.time}},{{item.date|date:"MMM,d,yy"}}</time></span>
+                <span><time class="time">{{item.time}},{{item.date|date:"MMM,d,yy"}}</time></span>
                 
-                <p>{{item.comment}}</p>
+                <p id="location-comment">{{item.comment}}</p>
               </div>
               <ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(item)"></ion-delete-button>
             </div>

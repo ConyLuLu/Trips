@@ -11,7 +11,7 @@
           <div class="item item-icon-right">
               <h1 class="trip-topic">{{item.tripName}}</h1>
               <i class="button button-icon icon ion-more" ng-click="openPopover($event,item)"></i>
-              <p>{{ item.startAt|date:"MMM,d,yyyy"}} - {{ item.endAt|date:"MMM,dd,yyyy"}}</p>
+              <p class="time">{{ item.startAt|date:"MMM,d,yyyy"}} - {{ item.endAt|date:"MMM,dd,yyyy"}}</p>
           </div>
           <a class="item-image" href="#/locations/{{item.objectId}}/{{item.tripName}}">
             <img class="picholder" ng-show="item.imgURL !== undefined" ng-src="http://files.parsetfss.com/c2409cf6-d996-44ce-9d74-930211741549/{{item.imgURL}}">

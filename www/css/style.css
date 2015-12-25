@@ -197,7 +197,7 @@ button {
 .menu-select select{
     border-style:hidden;
     /*position: fixed;*/
-    max-width: 300px; 
+    max-width: 200px; 
 }
 #logoimg {
     width: 300px;
@@ -208,7 +208,7 @@ button {
 }
 .tab-item{
     border-radius: 5px;
-    font-family:微軟正黑體;
+    -family:微軟正黑體;
 }
 .button-size{
     font-size: 13px;

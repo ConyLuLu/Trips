@@ -225,11 +225,14 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
         time:$stateParams.time,
         comment:$stateParams.comment
       };
+      console.log($stateParams.place);
     if ($stateParams.imgURL === "") {$scope.location.imgURL = undefined;}
     var lat = "25.03925";
     var lng = "121.525";
     var url = "http://163.21.235.61/~koi/getLocation.php?lat=25.03925&lng=121.525&radius=500";
-    $http.get(url).then(function(response) {$scope.names = response.data.results;});
+    $http.get(url).then(function(response) {$scope.names = response.data.results;
+                                            $scope.place = $stateParams.place;
+                            });
 
     $scope.editLocation=function(){
         Todo.editLocation($scope.location.id,{

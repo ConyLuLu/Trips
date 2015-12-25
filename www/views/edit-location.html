@@ -7,10 +7,10 @@
         <img class="picholder edit rounded" ng-show="location.imgURL === undefined" ng-src="pics/150x150 add.png" ng-click="takePicture()">
         <ion-list class="font-regular">
             <label class="item item-input">
-                <span> 地點</span>
+                <span class="input-label"> 地點</span>
                     <div class="menu-select">
                         <select ng-model="location.place">  
-                            <option ng-repeat="x in names">
+                            <option ng-repeat="x in names" value="{{place}}">
                                 {{x.name}}{{Img}}
                             </option>
                         </select>

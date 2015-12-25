@@ -42,6 +42,8 @@ angular.module('todoApp.controllers',['ng-mfb','ngCordova']).controller('TodoLis
 }).controller('LocationListController',['$scope','Todo','$stateParams',function($scope,Todo,$stateParams){
 
     $scope.tripId = $stateParams.id;
+    $scope.tripName = $stateParams.tripName;
+
     Todo.getLocations($scope.tripId).success(function(data){
         for (var i = 0; i < data.results.length; i++) {
           if (data.results[i].Img_File !== undefined) {

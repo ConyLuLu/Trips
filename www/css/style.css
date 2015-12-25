@@ -34,11 +34,14 @@
     font-family: 微软雅黑, 微軟正黑體;
     font-weight: bolder;
  }
- .trip-content {
+.trip-content {
     font-family: 微軟正黑體;
  }
- .loc-topic {
+.loc-topic {
     font-size: 18px;
+    font-family: 微软雅黑, 微軟正黑體;
+ }
+.loc-header,ion-view {
     font-family: 微软雅黑, 微軟正黑體;
  }
 .font-setitle {
@@ -162,6 +165,13 @@ button {
 }
 time {
     color: lightgrey;
+}
+/*icon button*/
+button.iconbtn {
+    color:#fff !important;
+    font-size: 30px;
+    margin-top: -10px;
+    vertical-align: middle !important;
 }
 /*-------------img size----------*/
 .img-s {

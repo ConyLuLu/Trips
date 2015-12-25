@@ -1,6 +1,7 @@
 <ion-view title="Edit">
+
     <ion-nav-buttons side="right"> 
-      <button class="button button-clear" ng-click="editLocation()">確定</button>
+      <button class="iconbtn button-clear ion-checkmark-round" ng-click="editLocation()"></button>
     </ion-nav-buttons>
 <ion-content class="has-header">
         <img class="picholder edit img-s rounded" ng-show="location.imgURL !== undefined" ng-src="{{location.imgURL}}" ng-click="takePicture()">
